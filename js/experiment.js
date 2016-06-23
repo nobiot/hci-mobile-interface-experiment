@@ -29,13 +29,19 @@ window.onload = function () {
     
 
     var buttonStart = document.getElementById("buttonStart");
-    var menuItemTarget = document.getElementById("menuItemTarget");
+    var menuItemTarget;
+    var textTarget;
+    var resultNumber = 0;
      
-
+    function endTimer() {
+            timeEnd = Date.now();
+            writeResult();
+            experimentReset();
+    }
     function menuCreate(n) {
         var menuItems = [n];
-        var targetIndex = Math.floor((Math.random() * n-1)) //get a number between 0 and-1 n to be the index of the target
-        for (var i = 0; i < n; i++){ // get n items 
+        var targetIndex = Math.floor((Math.random() * (n - 1) )) //get a number between 0 and n-1 to be the index of the target
+        for (var i=0; i < n; i++){ // get n items 
             var item = dictionary[Math.floor((Math.random() * dictionary.length))]; // generate random to length of the dictionary
             
             if (menuItems.includes(item) == false){ // check if the item is already in the chosen one
@@ -48,49 +54,57 @@ window.onload = function () {
         }
         // Create <li> elements
         var ul = document.getElementById("navigationMenu");
-        menuItems.forEach(function(item) {
+        
+        for (var i=0; i<n ;i++) {
             var li = document.createElement("li");
             var a  = document.createElement("a");
-            a.innerHTML = item;
+            a.innerHTML = menuItems[i];
+            if(i==targetIndex) {
+                a.setAttribute("id", "menuItemTarget");
+                textTarget = menuItems[i];
+            }
             li.appendChild(a);
             ul.appendChild(li);
-        });
-        // Randomly determine the target
+        }
+        menuItemTarget = document.getElementById("menuItemTarget");
+        menuItemTarget.onclick = endTimer;
     }
     
     function targetDisplay() {
-        
+        var element = document.getElementById("targetDisplay");
+        element.innerHTML = textTarget;
     }
-
+    function targetRemove() {
+        var element = document.getElementById("targetDisplay");
+        element.innerHTML = "";
+    }
+    
     function buttonToggleOff() {
         //TODO
     }
     
-    function reset() {
+    function experimentReset() {
         var ul = document.getElementById("navigationMenu");
         while(ul.firstChild) {
             ul.removeChild(ul.firstChild);
         }
+        targetRemove();
     }
     
     function writeResult() {
-        var resultArea = document.getElementById("resultArea");
+        resultNumber += 1;
+        var resultDisplay = document.getElementById("resultDisplay");
         var p = document.createElement("p")
         var duration = timeEnd - timeStart;
-        p.innerHTML = "Result: " + duration + " milliseconds";
-        resultArea.appendChild(p);
+        p.innerHTML = "Result " + resultNumber + ": " + duration + " milliseconds";
+        resultDisplay.appendChild(p);
     }
 
     buttonStart.onclick = function experimentStart() {
+        experimentReset();
         menuCreate(numberOfMenuItems);
         targetDisplay()
         timeStart = Date.now();
         buttonToggleOff();
-    }
-    
-    menuItemTarget.onclick = function endTimer() {
-        timeEnd = Date.now();
-        writeResult();
-        reset();
     }
 }
