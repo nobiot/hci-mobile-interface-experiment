@@ -25,7 +25,7 @@ window.onload = function () {
     }
     function menuCreate(n) {
         var menuItems = [n];
-        var targetIndex = Math.floor((Math.random() * (n - 1) )) //get a number between 0 and n-1 to be the index of the target
+        var targetIndex = Math.floor((Math.random() * n )) //get a number from 0 to n-1 to be the index of the target
         for (var i=0; i < n; i++){ // get n items 
             var item = dictionary[Math.floor((Math.random() * dictionary.length))]; // generate random to length of the dictionary
             
