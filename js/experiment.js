@@ -1,20 +1,5 @@
-function addElement() {
-  // create a new div element
-  // and give it some content
-    var li = document.createElement("li");
-    var a = document.createElement("a");
-    var text = document.createTextNode("Hi there and greetings!");
-    a.appendChild(text);
-    li.appendChild(a); //add the text node to the newly created div. 
-  // add the newly created element and its content into the DOM 
-    var ul = document.getElementById("navigationMenu");
-    ul.appendChild(li);
-    alert("added");
-}
-
 // Browser limitation
 // array.includes(element) is not supported on all platforms (notably, IE and Edge do not).
-
 
 window.onload = function () {
     
@@ -79,10 +64,6 @@ window.onload = function () {
         element.innerHTML = "";
     }
     
-    function buttonToggleOff() {
-        //TODO
-    }
-    
     function experimentReset() {
         var ul = document.getElementById("navigationMenu");
         while(ul.firstChild) {
@@ -105,6 +86,5 @@ window.onload = function () {
         menuCreate(numberOfMenuItems);
         targetDisplay()
         timeStart = Date.now();
-        buttonToggleOff();
     }
 }
