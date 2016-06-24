@@ -40,14 +40,43 @@ window.onload = function () {
         // Create <li> elements
         var ul = document.getElementById("navigationMenu");
         
+// Framework7 
+//                   <li>
+//                    <a class="item-link close-panel" href="forms.html">
+//                        <div class="item-content">
+//                            <div class="item-media">
+//                                <i class="icon icon-f7"></i>
+//                            </div>
+//                            <div class="item-inner">
+//                                <div class="item-title">Forms</div>
+//                            </div>
+//                        </div>
+//                    </a>
+//                    </li>
+//        
         for (var i=0; i<n ;i++) {
             var li = document.createElement("li");
             var a  = document.createElement("a");
-            a.innerHTML = menuItems[i];
+            var itemContent = document.createElement("div");
+            itemContent.setAttribute("class", "item-content");
+            var itemMedia = document.createElement("div");
+            itemMedia.setAttribute("class", "item-media");
+            var icon = document.createElement("i");
+            icon.setAttribute("class", "icon icon-f7"); //<<<<<<This part needs to be changed to select icons dynamically
+            var itemInner = document.createElement("div");
+            itemInner.setAttribute("class", "item-inner");
+            var itemTitle = document.createElement("div");
+            itemTitle.setAttribute("class", "item-title");
+            itemTitle.innerHTML = menuItems[i];
             if(i==targetIndex) {
                 a.setAttribute("id", "menuItemTarget");
                 textTarget = menuItems[i];
             }
+            itemInner.appendChild(itemTitle);
+            itemMedia.appendChild(icon);
+            itemContent.appendChild(itemMedia);
+            itemContent.appendChild(itemInner);
+            a.appendChild(itemContent);
             li.appendChild(a);
             ul.appendChild(li);
         }
