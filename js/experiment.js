@@ -18,7 +18,7 @@ window.onload = function () {
     
     function targetRemove() {
         var element = document.getElementById("targetDisplay");
-        element.innerHTML = "";
+        element.textContent = "";
     }
     
     function experimentReset() {
@@ -34,7 +34,7 @@ window.onload = function () {
         var resultDisplay = document.getElementById("resultDisplay"),
             p = document.createElement("p"),
             duration = timeEnd - timeStart;
-        p.innerHTML = "Result " + resultNumber + ": " + duration + " milliseconds";
+        p.textContent = "Result " + resultNumber + ": " + duration + " milliseconds";
         resultDisplay.appendChild(p);
     }
 
@@ -85,7 +85,7 @@ window.onload = function () {
             itemInner.setAttribute("class", "item-inner");
             var itemTitle = document.createElement("div");
             itemTitle.setAttribute("class", "item-title");
-            itemTitle.innerHTML = menuItems[i];
+            itemTitle.textContent = menuItems[i];
             if(i==targetIndex) {
                 a.setAttribute("id", "menuItemTarget");
                 textTarget = menuItems[i];
@@ -104,7 +104,7 @@ window.onload = function () {
 
     function targetDisplay() {
         var element = document.getElementById("targetDisplay");
-        element.innerHTML = textTarget;
+        element.textContent = textTarget;
     }
     
     buttonStart.onclick = function experimentStart() {
