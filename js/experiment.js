@@ -1,25 +1,23 @@
 // Browser limitation
 // array.includes(element) is not supported on all platforms (notably, IE and Edge do not).
 
-window.onload = function experiment() {
+var timeStart,
+    timeEnd,
+    numberOfRepeatsCurrent = 0,
+    numberOfRepeats        = 10, // number of repeats in one experiment. Vague. per block or the whole?
+    results = [],
+    numberOfMenuItems      = 8, // default number of menu items
+    dictionary = ["Apple", "Orange", "Mango", "Açaí", "Ackee",
+                  "Banana", "Batuan", "Caimito", "Cantaloupe", "Chinese olive",
+                  "Date", "Durian", "Galia melon", "Grumichama", "Guava"
+                ], // words taken from https://en.wikipedia.org/wiki/List_of_culinary_fruits
+    resultNumber = 0;
+function experiment () {
     'use strict';
-    
-    var timeStart,
-        timeEnd,
-        numberOfRepeatsCurrent = 0,
-        numberOfRepeats        = 10, // number of repeats in one experiment. Vague. per block or the whole?
-        results = [],
-        numberOfMenuItems      = 8, // default number of menu items
-        dictionary = ["Apple", "Orange", "Mango", "Açaí", "Ackee",
-                      "Banana", "Batuan", "Caimito", "Cantaloupe", "Chinese olive",
-                      "Date", "Durian", "Galia melon", "Grumichama", "Guava"
-                    ], // words taken from https://en.wikipedia.org/wiki/List_of_culinary_fruits
-        buttonStart = document.getElementById("buttonStart"),
+    var buttonStart = document.getElementById("buttonStart"),
         menuItemTarget,
-        textTarget,
-        resultNumber = 0;
+        textTarget;
         
-    
     function targetRemove() {
         var element = document.getElementById("targetDisplay");
         element.textContent = "";
@@ -121,6 +119,11 @@ window.onload = function experiment() {
     
     var buttonSave = document.getElementById("buttonSave");
     buttonSave.onclick = function saveResults() {
+        results.push("error: 0");
+        results.unshift("block: slide");
+        results.unshift("P01");
+        
+        // Tried sending an object with key:value. Didn't work.
         if(results.length != 0){
             var req = new XMLHttpRequest();
             req.open("POST", "", false); // Syncronous call is deprecated. TODO
