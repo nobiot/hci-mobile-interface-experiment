@@ -14,11 +14,6 @@ PORT = 8080
  
 class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
  
-    def do_GET(self):
-        """ Handle GET Request"""
-        logging.error(self.headers)
-        http.server.SimpleHTTPRequestHandler.do_GET(self)
- 
     def do_POST(self):
         """ Handle POST Request"""
         # Check if path is there.
