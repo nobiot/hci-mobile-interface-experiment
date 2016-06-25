@@ -1,12 +1,15 @@
 // Browser limitation
 // array.includes(element) is not supported on all platforms (notably, IE and Edge do not).
 
-window.onload = function () {
+window.onload = function experiment() {
     'use strict';
     
     var timeStart,
         timeEnd,
-        numberOfMenuItems = 8, // default number of menu items
+        numberOfRepeatsCurrent = 0,
+        numberOfRepeats        = 10, // number of repeats in one experiment. Vague. per block or the whole?
+        results = [],
+        numberOfMenuItems      = 8, // default number of menu items
         dictionary = ["Apple", "Orange", "Mango", "Açaí", "Ackee",
                       "Banana", "Batuan", "Caimito", "Cantaloupe", "Chinese olive",
                       "Date", "Durian", "Galia melon", "Grumichama", "Guava"
@@ -15,6 +18,7 @@ window.onload = function () {
         menuItemTarget,
         textTarget,
         resultNumber = 0;
+        
     
     function targetRemove() {
         var element = document.getElementById("targetDisplay");
@@ -30,10 +34,11 @@ window.onload = function () {
     }
 
     function writeResult() {
-        resultNumber += 1;
         var resultDisplay = document.getElementById("resultDisplay"),
             p = document.createElement("p"),
             duration = timeEnd - timeStart;
+        results[resultNumber] = duration; // This needs to be before incrementing resultNumber
+        resultNumber += 1;
         p.textContent = "Result " + resultNumber + ": " + duration + " milliseconds";
         resultDisplay.appendChild(p);
     }
@@ -45,7 +50,7 @@ window.onload = function () {
     }
 
     function menuCreate(n) {
-        var menuItems = [n],
+        var menuItems = [],
             counter = 0,
             targetIndex = Math.floor((Math.random() * n)); //get a number from 0 to n-1 to be the index of the target
         while (counter < n) {
@@ -113,5 +118,16 @@ window.onload = function () {
         targetDisplay();
         timeStart = Date.now();
     }
-
+    
+    var buttonSave = document.getElementById("buttonSave");
+    buttonSave.onclick = function saveResults() {
+        if(results.length != 0){
+            var req = new XMLHttpRequest();
+            req.open("POST", "", false); // Syncronous call is deprecated. TODO
+            req.send(results);
+            console.log(req.responseText); 
+        }else{
+            alert("There is no result.");
+        }
+    }
 }
