@@ -4,6 +4,14 @@
 var NOBexperiment = (function () {
     'use strict';
     
+    // Adding fontawesome to the web page
+    // <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    var link   =  document.createElement("link");
+    link.setAttribute("rel", "stylesheet");
+    link.setAttribute("href", "../css/font-awesome.min.css");
+    var head = document.querySelector("head")
+                       .appendChild(link);
+    
     //Object to be return to provide public properties to the caller
     var experiment = {},
     
@@ -16,13 +24,18 @@ var NOBexperiment = (function () {
                       "Banana", "Batuan", "Caimito", "Cantaloupe", "Chinese olive",
                       "Date", "Durian", "Galia melon", "Grumichama", "Guava"
                      ], // words taken from https://en.wikipedia.org/wiki/List_of_culinary_fruits
+        icons       = ["fa fa-hand-o-up", "fa fa-wheelchair-alt", "fa fa-area-chart", "fa fa-bed", "fa fa-check-circle-o",
+                       "fa fa-flask", "fa fa-folder-open-o", "fa fa-globe", "fa fa-hdd-o", "fa fa-hotel",
+                       "fa fa-keyboard-o", "fa fa-mobile", "fa fa-recycle", "fa fa-search", "fa fa-space-shuttle"
+                     ],
         numberOfTrialCurrent = 0, // Current Nth trial
         numberOfTrials        = 10, // Number of repeats in one experiment. Vague. per block or the whole?
         resultNth = 0, // Current Nth Trial
         menuItemTarget,
-        textTarget;
+        targetText,
+        targetIcon;
     
-    var buttonStart = document.getElementById("buttonStart").onclick = trialStart; 
+    var buttonStart = document.getElementById("buttonStart").onclick = trialStart;
     // probably listener is better TODO
     
     function trialStart() {
@@ -60,11 +73,17 @@ var NOBexperiment = (function () {
         var menuItems = [],
             counter = 0,
             targetIndex = Math.floor((Math.random() * n)); //get a number from 0 to n-1 to be the index of the target
-        while (counter < n) {
+        while (counter < n * 2) {// x2 because text (0 to n-1) and icon (n to n-1)
             // Randomly pick an item from the dictionary of any length.
-            var item = dictionary[Math.floor((Math.random() * dictionary.length))];
+            var item;
+            // Below both texts and icons are separately chosen; they are not paired in a fixed way.
+            if (counter < n) { // text: from index 0 to n-1
+                item = dictionary[Math.floor((Math.random() * dictionary.length))];
+            } else { // icon: from index n to n*2-1
+                item = icons[Math.floor((Math.random() * icons.length))];
+            }
             // Add the item only when it is already in the menuItems array.
-            if (menuItems.includes(item) === false) {
+            if (!menuItems.includes(item)) {
                 menuItems[counter] = item;
                 counter += 1;
             }//Repeat and pick an item again if it is already in the array.
@@ -92,7 +111,7 @@ var NOBexperiment = (function () {
             var itemMedia = document.createElement("div");
             itemMedia.setAttribute("class", "item-media");
             var icon = document.createElement("i");
-            icon.setAttribute("class", "icon icon-f7"); //<<<<<<This part needs to be changed to select icons dynamically
+            icon.setAttribute("class", menuItems[i+n]);
             var itemInner = document.createElement("div");
             itemInner.setAttribute("class", "item-inner");
             var itemTitle = document.createElement("div");
@@ -100,7 +119,8 @@ var NOBexperiment = (function () {
             itemTitle.textContent = menuItems[i];
             if(i==targetIndex) {
                 a.setAttribute("id", "menuItemTarget");
-                textTarget = menuItems[i];
+                targetText = menuItems[i];
+                targetIcon = menuItems[i+n]; // icons are appended after the n texts, hence +n
             }
             itemInner.appendChild(itemTitle);
             itemMedia.appendChild(icon);
@@ -115,13 +135,17 @@ var NOBexperiment = (function () {
     }
 
     function targetDisplay() {
-        var element = document.getElementById("targetDisplay");
-        element.textContent = textTarget;
+        var textElement = document.getElementById("targetText");
+        textElement.textContent = targetText;
+        var iconElement = document.getElementById("targetIcon");
+        iconElement.setAttribute("class", targetIcon);
     }
     
     function targetRemove() {
-        var element = document.getElementById("targetDisplay");
-        element.textContent = "";
+        var textElement = document.getElementById("targetText");
+        textElement.textContent = "";
+        var iconElement = document.getElementById("targetIcon");
+        iconElement.removeAttribute("class");
     }
 
 //Temporarily here. Should be separated out for server communication.
