@@ -1,29 +1,44 @@
 // Browser limitation
 // array.includes(element) is not supported on all platforms (notably, IE and Edge do not).
 
-var timeStart,
-    timeEnd,
-    numberOfRepeatsCurrent = 0,
-    numberOfRepeats        = 10, // number of repeats in one experiment. Vague. per block or the whole?
-    results = [],
-    numberOfMenuItems      = 8, // default number of menu items
-    dictionary = ["Apple", "Orange", "Mango", "Açaí", "Ackee",
-                  "Banana", "Batuan", "Caimito", "Cantaloupe", "Chinese olive",
-                  "Date", "Durian", "Galia melon", "Grumichama", "Guava"
-                ], // words taken from https://en.wikipedia.org/wiki/List_of_culinary_fruits
-    resultNumber = 0;
-function experiment () {
+var NOBexperiment = (function () {
     'use strict';
-    var buttonStart = document.getElementById("buttonStart"),
+    
+    //Object to be return to provide public properties to the caller
+    var experiment = {},
+    
+    // Private properties   
+        results = [],
+        timeStart,
+        timeEnd,
+        numberOfMenuItems      = 8, // default number of menu items
+        dictionary = ["Apple", "Orange", "Mango", "Açaí", "Ackee",
+                      "Banana", "Batuan", "Caimito", "Cantaloupe", "Chinese olive",
+                      "Date", "Durian", "Galia melon", "Grumichama", "Guava"
+                     ], // words taken from https://en.wikipedia.org/wiki/List_of_culinary_fruits
+        numberOfTrialCurrent = 0, // Current Nth trial
+        numberOfTrials        = 10, // Number of repeats in one experiment. Vague. per block or the whole?
+        resultNth = 0, // Current Nth Trial
         menuItemTarget,
         textTarget;
-        
-    function targetRemove() {
-        var element = document.getElementById("targetDisplay");
-        element.textContent = "";
+    
+    var buttonStart = document.getElementById("buttonStart").onclick = trialStart; 
+    // probably listener is better TODO
+    
+    function trialStart() {
+        trialReset();
+        menuCreate(numberOfMenuItems);
+        targetDisplay();
+        timeStart = Date.now();
     }
     
-    function experimentReset() {
+    function trialEnd() {
+        timeEnd = Date.now();
+        trialResultWrite();
+        trialReset();
+    }
+
+    function trialReset() {
         var ul = document.getElementById("navigationMenu");
         while (ul.firstChild) {
             ul.removeChild(ul.firstChild);
@@ -31,20 +46,14 @@ function experiment () {
         targetRemove();
     }
 
-    function writeResult() {
+    function trialResultWrite() {
         var resultDisplay = document.getElementById("resultDisplay"),
             p = document.createElement("p"),
             duration = timeEnd - timeStart;
-        results[resultNumber] = duration; // This needs to be before incrementing resultNumber
-        resultNumber += 1;
-        p.textContent = "Result " + resultNumber + ": " + duration + " milliseconds";
+        results[resultNth] = duration; // This needs to be before incrementing resultNumber
+        resultNth += 1;
+        p.textContent = "Result " + resultNth + ": " + duration + " milliseconds";
         resultDisplay.appendChild(p);
-    }
-
-    function endTimer() {
-        timeEnd = Date.now();
-        writeResult();
-        experimentReset();
     }
 
     function menuCreate(n) {
@@ -102,7 +111,7 @@ function experiment () {
             ul.appendChild(li);
         }
         menuItemTarget = document.getElementById("menuItemTarget");
-        menuItemTarget.onclick = endTimer;
+        menuItemTarget.onclick = trialEnd;
     }
 
     function targetDisplay() {
@@ -110,16 +119,15 @@ function experiment () {
         element.textContent = textTarget;
     }
     
-    buttonStart.onclick = function experimentStart() {
-        experimentReset();
-        menuCreate(numberOfMenuItems);
-        targetDisplay();
-        timeStart = Date.now();
+    function targetRemove() {
+        var element = document.getElementById("targetDisplay");
+        element.textContent = "";
     }
-    
+
+//Temporarily here. Should be separated out for server communication.
     var buttonSave = document.getElementById("buttonSave");
     buttonSave.onclick = function saveResults() {
-        
+
         var o = {
             participant: "P01",
             firstBlock: {mode: "side panel",
@@ -139,4 +147,12 @@ function experiment () {
             alert("There is no result.");
         }
     }
-}
+    
+    // Public properties
+    experiment.getResults = function() {
+        return results;
+    }
+    return experiment;
+})(); //IFFE
+
+

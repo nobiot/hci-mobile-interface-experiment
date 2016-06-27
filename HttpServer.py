@@ -21,7 +21,7 @@ class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     def do_POST(self):
         # Get length of the data and read it.
         length = self.headers['content-length']
-        data = self.rfile.read(int(length))
+        data = self.rfile.read(int(length)) #TODO: Now I am sending JSON. Parse it to create unique file names
  
         # Write the data to a file in current dir.
         filename = 'particpantN' + EXTENSION
@@ -33,7 +33,7 @@ class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         self.send_header('Content-type', 'text/json')
         self.send_response(200, 'OK')
         self.end_headers()
-        http.server.SimpleHTTPRequestHandler.do_GET(self)  
+#        http.server.SimpleHTTPRequestHandler.do_GET(self)  
  
 Handler = HTTPRequestHandler
 httpd = socketserver.TCPServer(("", PORT), Handler)
