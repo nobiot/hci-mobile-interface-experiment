@@ -4,14 +4,6 @@
 var NOBexperiment = (function () {
     'use strict';
     
-    // Adding fontawesome to the web page
-    // <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    var link   =  document.createElement("link");
-    link.setAttribute("rel", "stylesheet");
-    link.setAttribute("href", "../css/font-awesome.min.css");
-    var head = document.querySelector("head")
-                       .appendChild(link);
-    
     //Object to be return to provide public properties to the caller
     var experiment = {},
     
@@ -35,6 +27,15 @@ var NOBexperiment = (function () {
         targetText,
         targetIcon;
     
+    // Adding fontawesome to the web page
+    // <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    var link,
+        head;
+    link   =  document.createElement("link");
+    link.setAttribute("rel", "stylesheet");
+    link.setAttribute("href", "../css/font-awesome.min.css");
+    head = document.querySelector("head")
+                       .appendChild(link);
     var buttonStart = document.getElementById("buttonStart").onclick = trialStart;
     // probably listener is better TODO
     
@@ -80,7 +81,7 @@ var NOBexperiment = (function () {
             if (counter < n) { // text: from index 0 to n-1
                 item = dictionary[Math.floor((Math.random() * dictionary.length))];
             } else { // icon: from index n to n*2-1
-                item = icons[Math.floor((Math.random() * icons.length))];
+                item = icons[Math.floor((Math.random() * icons.length))]  + " fa-fw"; // fixed width for fontawesome
             }
             // Add the item only when it is already in the menuItems array.
             if (!menuItems.includes(item)) {
@@ -104,17 +105,25 @@ var NOBexperiment = (function () {
 // 
         var ul = document.getElementById("navigationMenu");
         for (var i=0; i<n ;i++) {
-            var li = document.createElement("li");
-            var a  = document.createElement("a");
-            var itemContent = document.createElement("div");
+            var li,
+                a,
+                itemContent,
+                itemMedia,
+                icon,
+                itemInner,
+                itemTitle;
+            
+            li = document.createElement("li");
+            a  = document.createElement("a");
+            itemContent = document.createElement("div");
             itemContent.setAttribute("class", "item-content");
-            var itemMedia = document.createElement("div");
+            itemMedia = document.createElement("div");
             itemMedia.setAttribute("class", "item-media");
-            var icon = document.createElement("i");
+            icon = document.createElement("i");
             icon.setAttribute("class", menuItems[i+n]);
-            var itemInner = document.createElement("div");
+            itemInner = document.createElement("div");
             itemInner.setAttribute("class", "item-inner");
-            var itemTitle = document.createElement("div");
+            itemTitle = document.createElement("div");
             itemTitle.setAttribute("class", "item-title");
             itemTitle.textContent = menuItems[i];
             if(i==targetIndex) {
