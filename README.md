@@ -15,3 +15,8 @@ python HttpServer.py
 
 This is a test of saving files. Files are saved as `participantN.css` under `results` folder. 
 Currently, the file is overwritten every instance. It will be done by a Javascript for each participant (one file per particpant).
+
+
+# TODO 
+
+- Need to work out a way to make Pukar's app with one page app, or use the form to make the submit communicate with the server. I'd prefer to explore the first option first. 
