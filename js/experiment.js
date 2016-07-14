@@ -1,5 +1,11 @@
 // Browser limitation
 // array.includes(element) is not supported on all platforms (notably, IE and Edge do not).
+// TODO
+// - Random numbers
+// - Remember the user
+// - Count the trials
+// - Save with User
+// - Mix material and ios themes
 
 var NOBexperiment = (function () {
     'use strict';
@@ -36,8 +42,7 @@ var NOBexperiment = (function () {
     link.setAttribute("href", "../css/font-awesome.min.css");
     head = document.querySelector("head")
                        .appendChild(link);
-    //var buttonStart = document.getElementById("buttonStart").onclick = trialStart;
-    // probably listener is better TODO
+
     
     function trialStart() {
         trialReset();
@@ -157,35 +162,14 @@ var NOBexperiment = (function () {
         iconElement.removeAttribute("class");
     }
 
-//Temporarily here. Should be separated out for server communication.
-//    var buttonSave = document.getElementById("buttonSave");
-//    buttonSave.onclick = function saveResults() {
-//
-//        var o = {
-//            participant: "P01",
-//            firstBlock: {mode: "side panel",
-//                         results: results,
-//                         error: 0},
-//            secondBlock: {mode: "tab bar",
-//                          results: results,
-//                          error: 0}
-//        }      
-//
-//        if(results.length != 0){
-//            var req = new XMLHttpRequest();
-//            req.open("POST", "", false); // Syncronous call is deprecated. TODO
-//            req.send(JSON.stringify(o));
-//            console.log(req.responseText); 
-//        }else{
-//            alert("There is no result.");
-//        }
-//    }
-//    
     // Public properties
     experiment.getResults = function() {
         results[0] = 1;
         return results;
     }
+    
+    experiment.getFuncStart = trialStart;
+    
     return experiment;
     
 })(); //IIFE

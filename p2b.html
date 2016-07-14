@@ -1,112 +1,58 @@
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title>My App</title>
-    <!-- Path to Framework7 Library CSS-->
-    <link rel="stylesheet" href="css/framework7.ios.min.css">
-    <!-- Path to your custom app styles-->
-    <link rel="stylesheet" href="css/my-app.css">
-  </head>
-  <body>
-    <!-- Status bar overlay for fullscreen mode-->
-    <div class="statusbar-overlay"></div>
-    <!-- Panels overlay-->
-    <div class="panel-overlay"></div>
-    <!-- Left panel with reveal effect-->
-    <div class="panel panel-left panel-reveal">
-      <div class="content-block">
-        <p>Left panel content goes here</p>
+<!-- Status bar overlay for fullscreen mode-->
+<div class="statusbar-overlay"></div>
+<!-- Panels overlay-->
+<div class="panel-overlay"></div>
+<div data-page="pattern-2" class="page">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="center">05</div>
       </div>
     </div>
-    <!-- Right panel with cover effect-->
-    <div class="panel panel-right panel-cover">
-      <div class="content-block">
-        <p>Right panel content goes here</p>
-      </div>
+    <div class="toolbar tabbar tabbar-labels toolbar-through">
+        <div class="toolbar-inner">
+            <a href="incorrectP2.html" class="tab-link">
+                <i class="icon icon-camera"></i>
+                <span class="tabbar-label">Label 1</span>
+            </a>
+            
+            <a href="incorrectP2.html" class="tab-link">
+                <i class="icon icon-camera"></i>
+                <span class="tabbar-label">Label 1</span>
+            </a>
+            
+            <a href="incorrectP2.html" class="tab-link">
+                <i class="icon icon-camera"></i>
+                <span class="tabbar-label">Label 1</span>
+            </a>
+            
+            <a href="#tab-4" class="tab-link">
+                <i class="icon icon-camera"></i>
+                <span class="tabbar-label">Label 1</span>
+            </a>
+            <a href="#tab-5" class="tab-link">
+                <i class="icon icon-camera"></i>
+                <span class="tabbar-label">More</span>
+            </a>
+        </div>
     </div>
-    <!-- Views, and they are tabs-->
-    <!-- We need to set "toolbar-through" class on it to keep space for our tab bar-->
-    <div class="views tabs toolbar-through">
-      <!-- Your first view, it is also a .tab and should have "active" class to make it visible by default-->
-       <div id="view-1" class="view view-main tab active">
-        <!-- We can make with view with navigation, let's add Top Navbar-->
-        <div class="navbar">
-          <div class="navbar-inner">
-            <div class="center sliding">01</div>
-          </div>
-        </div>
-        <div class="pages navbar-through">
-          <div data-page="index-1" class="page">
-            <div class="page-content">
+    <div class="page-content">
+        <div class="tabs">
+            <div id="tab-4" class="tab">
+                    <div class="page-content">
+                        <div class="content-block">	
+                            <div class="login-screen-title">Incorrect!</div>
+                            <div class="list-block-label">Please try again.</div>
+                            <div class="list-block-label"></div>        
+                            <div class="row"></div> 
+                        </div>
+                        <div class="col-100"><a href="pattern-2-precue.html" class="button button-big button-fill color-green">Try again</a></div>
+                    </div>
             </div>
-          </div>
-        </div>
-      </div>
-      
-      <div id="view-2" class="view tab">
-        <!-- We can make with view with navigation, let's add Top Navbar-->
-        <div class="navbar">
-          <div class="navbar-inner">
-            <div class="center sliding">02</div>
-          </div>
-        </div>
-        <div class="pages navbar-through">
-          <div data-page="index-2" class="page">
-            <div class="page-content">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="view-3" class="view tab">
-        <!-- We can make with view with navigation, let's add Top Navbar-->
-        <div class="navbar">
-          <div class="navbar-inner">
-            <div class="center sliding">03</div>
-          </div>
-        </div>
-        <div class="pages navbar-through">
-          <div data-page="index-3" class="page">
-            <div class="page-content">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="view-4" class="view tab">
-        <!-- We can make with view with navigation, let's add Top Navbar-->
-        <div class="navbar">
-          <div class="navbar-inner">
-            <div class="center sliding">04</div>
-          </div>
-        </div>
-        <div class="pages navbar-through">
-          <div data-page="index-4" class="page">
-            <div class="page-content">
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Second view (for second wrap)-->
-      <div id="view-5" class="view tab">
-        <!-- We can make with view with navigation, let's add Top Navbar-->
-        <div class="navbar">
-          <div class="navbar-inner">
-            <div class="center sliding">More</div>
-          </div>
-        </div>
-        <div class="pages navbar-through">
-          <div data-page="index-5" class="page">
-            <div class="page-content">
-              <div class="list-block">
+            <div id="tab-5" class="tab">
+               <div class="list-block">
                 <ul>
                   <li>
-                  <a href="correct.html" class="item-link">
+                  <a href="correctP2.html" class="item-link">
 				  	<div class="item-content">
 				  			<div class="item-inner"> 
 					  			<div class="item-title">05</div>
@@ -115,151 +61,151 @@
 					</a>
 					</li>
 
-                  <li><a href="incorrect.html" class="item-link">
+                  <li><a href="incorrectP2.html" class="item-link">
                       <div class="item-content"> 
                         <div class="item-inner">
                           <div class="item-title">06</div>
                         </div>
                       </div></a></li>
-                  <li><a href="incorrect.html" class="item-link">
+                  <li><a href="incorrectP2.html" class="item-link">
                       <div class="item-content">
                         <div class="item-inner"> 
                           <div class="item-title">07</div>
                         </div>
                       </div></a></li>
-                  <li><a href="incorrect.html" class="item-link">
+                  <li><a href="incorrectP2.html" class="item-link">
                       <div class="item-content"> 
                         <div class="item-inner">
                           <div class="item-title">08</div>
                         </div>
                       </div></a></li>
-                  <li><a href="incorrect.html" class="item-link">
+                  <li><a href="incorrectP2.html" class="item-link">
                       <div class="item-content">
                         <div class="item-inner"> 
                           <div class="item-title">09</div>
                         </div>
                       </div></a></li>
-                  <li><a href="incorrect.html" class="item-link">
+                  <li><a href="incorrectP2.html" class="item-link">
                       <div class="item-content"> 
                         <div class="item-inner">
                           <div class="item-title">10</div>
                         </div>
                       </div></a></li>
-                  <li><a href="incorrect.html" class="item-link">
+                  <li><a href="incorrectP2.html" class="item-link">
                       <div class="item-content">
                         <div class="item-inner"> 
                           <div class="item-title">11</div>
                         </div>
                       </div></a></li>
-                  <li><a href="incorrect.html" class="item-link">
+                  <li><a href="incorrectP2.html" class="item-link">
                       <div class="item-content"> 
                         <div class="item-inner">
                           <div class="item-title">12</div>
                         </div>
                       </div></a></li>
-                  <li><a href="incorrect.html" class="item-link">
+                  <li><a href="incorrectP2.html" class="item-link">
                       <div class="item-content"> 
                         <div class="item-inner">
                           <div class="item-title">13</div>
                         </div>
                       </div></a></li>
-                  <li><a href="incorrect.html" class="item-link">
+                  <li><a href="incorrectP2.html" class="item-link">
                       <div class="item-content"> 
                         <div class="item-inner">
                           <div class="item-title">14</div>
                         </div>
                       </div></a></li>
-                  <li><a href="incorrect.html" class="item-link">
+                  <li><a href="incorrectP2.html" class="item-link">
                       <div class="item-content"> 
                         <div class="item-inner">
                           <div class="item-title">15</div>
                         </div>
                       </div></a></li>                      
-                  <li><a href="incorrect.html" class="item-link">
+                  <li><a href="incorrectP2.html" class="item-link">
                       <div class="item-content"> 
                         <div class="item-inner">
                           <div class="item-title">16</div>
                         </div>
                       </div></a></li>                      
-                  <li><a href="incorrect.html" class="item-link">
+                  <li><a href="incorrectP2.html" class="item-link">
                       <div class="item-content"> 
                         <div class="item-inner">
                           <div class="item-title">17</div>
                         </div>
                       </div></a></li>                      
-                  <li><a href="incorrect.html" class="item-link">
+                  <li><a href="incorrectP2.html" class="item-link">
                       <div class="item-content"> 
                         <div class="item-inner">
                           <div class="item-title">18</div>
                         </div>
                       </div></a></li>                      
-                  <li><a href="incorrect.html" class="item-link">
+                  <li><a href="incorrectP2.html" class="item-link">
                       <div class="item-content"> 
                         <div class="item-inner">
                           <div class="item-title">19</div>
                         </div>
                       </div></a></li>                      
-                  <li><a href="incorrect.html" class="item-link">
+                  <li><a href="incorrectP2.html" class="item-link">
                       <div class="item-content"> 
                         <div class="item-inner">
                           <div class="item-title">20</div>
                         </div>
                       </div></a></li>                      
-                  <li><a href="incorrect.html" class="item-link">
+                  <li><a href="incorrectP2.html" class="item-link">
                       <div class="item-content"> 
                         <div class="item-inner">
                           <div class="item-title">21</div>
                         </div>
                       </div></a></li>                      
-                  <li><a href="incorrect.html" class="item-link">
+                  <li><a href="incorrectP2.html" class="item-link">
                       <div class="item-content"> 
                         <div class="item-inner">
                           <div class="item-title">22</div>
                         </div>
                       </div></a></li>                      
-                  <li><a href="incorrect.html" class="item-link">
+                  <li><a href="incorrectP2.html" class="item-link">
                       <div class="item-content"> 
                         <div class="item-inner">
                           <div class="item-title">23</div>
                         </div>
                       </div></a></li>
-                  <li><a href="incorrect.html" class="item-link">
+                  <li><a href="incorrectP2.html" class="item-link">
                       <div class="item-content"> 
                         <div class="item-inner">
                           <div class="item-title">24</div>
                         </div>
                       </div></a></li>                      
-                  <li><a href="incorrect.html" class="item-link">
+                  <li><a href="incorrectP2.html" class="item-link">
                       <div class="item-content"> 
                         <div class="item-inner">
                           <div class="item-title">25</div>
                         </div>
                       </div></a></li>                      
-                  <li><a href="incorrect.html" class="item-link">
+                  <li><a href="incorrectP2.html" class="item-link">
                       <div class="item-content"> 
                         <div class="item-inner">
                           <div class="item-title">26</div>
                         </div>
                       </div></a></li>
-                  <li><a href="incorrect.html" class="item-link">
+                  <li><a href="incorrectP2.html" class="item-link">
                       <div class="item-content"> 
                         <div class="item-inner">
                           <div class="item-title">27</div>
                         </div>
                       </div></a></li>                      
-                  <li><a href="incorrect.html" class="item-link">
+                  <li><a href="incorrectP2.html" class="item-link">
                       <div class="item-content"> 
                         <div class="item-inner">
                           <div class="item-title">28</div>
                         </div>
                       </div></a></li>                      
-                  <li><a href="incorrect.html" class="item-link">
+                  <li><a href="incorrectP2.html" class="item-link">
                       <div class="item-content"> 
                         <div class="item-inner">
                           <div class="item-title">29</div>
                         </div>
                       </div></a></li>
-                  <li><a href="incorrect.html" class="item-link">
+                  <li><a href="incorrectP2.html" class="item-link">
                       <div class="item-content"> 
                         <div class="item-inner">
                           <div class="item-title">30</div>
@@ -274,17 +220,6 @@
                 </ul>
               </div>
             </div>
-          </div>
         </div>
-      </div>
-      <!-- Bottom Tabbar-->
-      <div class="toolbar tabbar tabbar-labels">
-        <div class="toolbar-inner"><a href="#view-1" class="tab-link active"> <i class="icon"></i><span class="tabbar-label">01</span></a><a href="#view-2" class="tab-link"><i class="icon"></i><span class="tabbar-label">02</span></a><a href="#view-3" class="tab-link"> <i class="icon"></i><span class="tabbar-label">03</span></a><a href="#view-4" class="tab-link"> <i class="icon"></i><span class="tabbar-label">04</span></a><a href="#view-5" class="tab-link"> <i class="icon"></i><span class="tabbar-label">More</span></a></div>
-      </div>
     </div>
-    <!-- Path to Framework7 Library JS-->
-    <script type="text/javascript" src="js/framework7.js"></script>
-    <!-- Path to your app js-->
-    <script type="text/javascript" src="js/my-app.js"></script>
-  </body>
-</html>
+</div>
