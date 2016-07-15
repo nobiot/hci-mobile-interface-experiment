@@ -11,13 +11,6 @@
   </head>
   <body>
     <div class="statusbar-overlay"></div>
-    <div class="panel-overlay"></div>
- 
-    <!--<div class="panel panel-left panel-reveal">
-      <div class="content-block">
-        <p>Left panel content goes here</p>
-      </div>
-    </div>-->
     <!-- Views -->
     <div class="views">
       <!-- View -->
@@ -26,7 +19,7 @@
         <!-- Pages -->
         <div class="pages">
           <!-- Home page -->
-            <div data-page="index" class="page no-toolbar no-swipeback">
+          <div data-page="index" class="page no-toolbar no-swipeback">
               <div class="page-content login-screen-content">
               <div class="list-block-label">Enter your participant number in the text field below.<br>Please refer to your participant paper.</div>
               <form>
@@ -83,6 +76,7 @@
             </div>
           </div>
           <div data-page="pattern1" class="page cached navbar-through no-toolbar no-swipeback">
+          <div class="panel-overlay"></div>
               <div class="panel panel-left panel-cover">
                   <div class="content-block">
                       <div class="list-block">
@@ -93,13 +87,13 @@
                                     <div class="item-title">01</div>
                                   </div>
                                 </div></a></li>
-                            <li><a href="incorrectP1.html" class="item-link close-panel">
+                            <li><a href="#correctP1" class="item-link close-panel">
                                 <div class="item-content">
                                   <div class="item-inner">
                                     <div class="item-title">02</div>
                                   </div>
                                 </div></a></li>
-                            <li><a href="incorrectP1.html" class="item-link close-panel">
+                            <li><a href="#incorrectP1" class="item-link close-panel">
                                 <div class="item-content">
                                   <div class="item-inner">
                                     <div class="item-title">03</div>
@@ -109,15 +103,16 @@
                       </div>
                   </div>
               </div>
-                  <div class="navbar">
-            <div class="navbar-inner" data-page="pattern1">
-              <div class="left">
-                  <a href="#" data-panel="left" class="open-panel link icon-only">
-                      <i class="icon icon-bars"></i>
-                  </a>
+              <div class="navbar">
+                <div class="navbar-inner" data-page="pattern1">
+                  <div class="left">
+                      <a href="#" data-panel="left" class="open-panel link icon-only">
+                          <i class="icon icon-bars"></i>
+                      </a>
+                    </div>
+                  <div class="left">05</div>
                 </div>
-              <div class="left">05</div>
-            </div>
+              </div>
           </div>
           <!-- pattern 2 pages -->
           <div data-page="p2Go" class="page cached no-toolbar no-navbar">
@@ -145,7 +140,7 @@
                          <div class="list-block">
                           <ul>
                             <li>
-                            <a href="correctP2.html" class="item-link">
+                            <a href="#correctP1" class="item-link">
                               <div class="item-content">
                                       <div class="item-inner"> 
                                           <div class="item-title">05</div>
@@ -197,10 +192,36 @@
     </div>
 
           </div>
- 
+        
+          <!-- correct pages -->
+          <div data-page="correctP1" class="page cached no-toolbar no-navbar">
+            <div class="page-content login-screen-content">
+                <div class="content-block">	
+                    <div class="login-screen-title">Correct!</div>
+                    <div class="list-block-label">Completion time: <strong>0:12 seconds</strong></div>
+                    <div class="list-block-label"></div>        
+                    <div class="row">
+                </div> 
+              </div>
+                <div class="col-100"><a href="#pattern1" class="button button-big button-fill color-green">Next</a></div>
+            </div>
+          </div>
+        
+          <!-- correct pages -->
+          <div data-page="incorrectP1" class="page cached no-toolbar no-navbar">
+            <div class="page-content login-screen-content">
+                <div class="content-block">	
+                    <div class="login-screen-title">Incorrect!</div>
+                    <div class="list-block-label">Please try again.</div>
+                    <div class="list-block-label"></div>        
+                    <div class="row">
+                </div> 
+              </div>
+                <div class="col-100"><a href="#pattern1" class="button button-big button-fill color-green">Try again</a></div>
+            </div>
+          </div>
         </div>
-    </div>
-  </div>
+      </div>
     <script type="text/javascript" src="js/framework7.min.js"></script>
     <script type="text/javascript" src="js/my-app.js"></script>
     <script type="text/javascript" src="js/experiment.js"></script>
