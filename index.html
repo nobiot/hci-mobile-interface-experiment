@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -11,65 +10,201 @@
     <link rel="stylesheet" href="css/my-app.css">
   </head>
   <body>
+    <div class="statusbar-overlay"></div>
+    <div class="panel-overlay"></div>
+ 
+    <!--<div class="panel panel-left panel-reveal">
+      <div class="content-block">
+        <p>Left panel content goes here</p>
+      </div>
+    </div>-->
     <!-- Views -->
     <div class="views">
-    <!-- Your main view, should have "view-main" class -->
-        <div class="view view-main layout-white">
-            <div class="pages">
-              <div data-page="index" class="page">
-                <div class="page-content login-screen-content">
-                <div class="list-block-label">Enter your participant number in the text field below.<br>Please refer to your participant paper.</div>
-                  <form>
-                    <div class="list-block">
-                      <ul>
-                        <li class="item-content">
-                          <div class="item-inner"> 
-                            <div class="item-input">
-                              <input type="text" name="participant" placeholder="Your participant number"/>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="item-content">
-                        </li>
-                      </ul>
-                    </div>
-                  <div class="content-block"><p><a href="instructions.html" class="button button-big button-fill">Submit</a></p></div>
-                  </form>
+      <!-- View -->
+      <div class="view view-main">
+
+        <!-- Pages -->
+        <div class="pages">
+          <!-- Home page -->
+            <div data-page="index" class="page no-toolbar no-swipeback">
+              <div class="page-content login-screen-content">
+              <div class="list-block-label">Enter your participant number in the text field below.<br>Please refer to your participant paper.</div>
+              <form>
+                <div class="list-block">
+                  <ul>
+                    <li class="item-content">
+                      <div class="item-inner"> 
+                        <div class="item-input">
+                          <input type="text" name="participant" placeholder="Your participant number"/>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="item-content">
+                    </li>
+                  </ul>
                 </div>
+                <div class="content-block"><p><a href="#instructions" class="button button-big button-fill">Submit</a></p></div>
+              </form>
+              </div>
+          </div> 
+          
+          <!-- Instructions page -->
+          <div data-page="instructions" class="page cached no-toolbar no-navbar">
+            <div class="page-content">
+              <div class="content-block">
+                <p>PLEASE READ THE INSTRUCTIONS CAREFULLY:</p>
+                <ul>
+                  <li><p>You will be asked to search for a target within two different navigation patterns.</p></li>
+                  <li><p>Before each search trial, you will be given a hint of the target using an pre-cue number.</p></li>
+                  <li><p>There will we a total of 60 trials within each of the two blocks in this experiment.</p></ul><br>
+                <p><a href="#pattern-selector" class="button button-big button-fill">Continue</a></p></
               </div>
             </div>
+          </div>
+          
+          <!-- pattern selector page -->
+          <div data-page="pattern-selector" class="page cached no-toolbar no-navbar no-swipeback">
+            <div class="page-content login-screen-content">
+              <div class="content-block">
+                <p><strong>Select a navigation pattern</strong></p>
+                <p>Please refer to your participant paper and select a pattern.</p>
+                <p><a href="#p1Go" class="button button-big button-fill">Pattern 1</a></p>
+                <p><a href="#p2Go" class="button button-big button-fill">Pattern 2</a></p>
+              </div>
+            </div>
+          </div>
+            
+          <!-- pattern 1 pages -->
+          <div data-page="p1Go" class="page cached no-toolbar no-navbar no-swipeback">
+            <div class="page-content login-screen-content">
+              <div class="list-block-label">Find: 05</div>
+              <div class="content-block"><p><a href="#pattern1" class="button button-big button-fill">Go</a></p></div>
+              <div class="list-block-label">Task remaining: 59</div>
+            </div>
+          </div>
+          <div data-page="pattern1" class="page cached navbar-through no-toolbar no-swipeback">
+              <div class="panel panel-left panel-cover">
+                  <div class="content-block">
+                      <div class="list-block">
+                          <ul id="navigationMenu">
+                            <li class="item-link close-panel">
+                                <div class="item-content selected">
+                                  <div class="item-inner">
+                                    <div class="item-title">01</div>
+                                  </div>
+                                </div></a></li>
+                            <li><a href="incorrectP1.html" class="item-link close-panel">
+                                <div class="item-content">
+                                  <div class="item-inner">
+                                    <div class="item-title">02</div>
+                                  </div>
+                                </div></a></li>
+                            <li><a href="incorrectP1.html" class="item-link close-panel">
+                                <div class="item-content">
+                                  <div class="item-inner">
+                                    <div class="item-title">03</div>
+                                  </div>
+                                </div></a></li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+                  <div class="navbar">
+            <div class="navbar-inner" data-page="pattern1">
+              <div class="left">
+                  <a href="#" data-panel="left" class="open-panel link icon-only">
+                      <i class="icon icon-bars"></i>
+                  </a>
+                </div>
+              <div class="left">05</div>
+            </div>
+          </div>
+          <!-- pattern 2 pages -->
+          <div data-page="p2Go" class="page cached no-toolbar no-navbar">
+            <div class="page-content login-screen-content">
+            <div class="list-block-label ">Find: 05</div>
+              <div class="content-block">
+                  <p><a href="#pattern2" class="button button-big button-fill" id="buttonStart">Go</a></p>
+                </div>
+              <div class="list-block-label">Task remaining: 59</div>
+            </div>
+          </div>
+          <div data-page="pattern2" class="page cached navbar-through">
+                <div class="page-content">
+                  <div class="tabs">
+                      <div id="tab-4" class="tab">
+                          <div class="content-block">	
+                              <div class="login-screen-title">Incorrect!</div>
+                              <div class="list-block-label">Please try again.</div>
+                              <div class="list-block-label"></div>        
+                              <div class="row"></div> 
+                          </div>
+                          <div class="col-100"><a href="pattern-2-precue.html" class="button button-big button-fill color-green">Try again</a></div>
+                      </div>
+                      <div id="tab-5" class="tab">
+                         <div class="list-block">
+                          <ul>
+                            <li>
+                            <a href="correctP2.html" class="item-link">
+                              <div class="item-content">
+                                      <div class="item-inner"> 
+                                          <div class="item-title">05</div>
+                                      </div>
+                                  </div>
+                              </a>
+                              </li>
+                            <li>
+                            <a href="correctP2.html" class="item-link">
+                              <div class="item-content">
+                                      <div class="item-inner"> 
+                                          <div class="item-title">06</div>
+                                      </div>
+                                  </div>
+                              </a>
+                              </li>  
+                          </ul>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+            
+          <div class="toolbar tabbar tabbar-labels toolbar-through">
+        <div class="toolbar-inner">
+            <a href="incorrectP2.html" class="tab-link">
+                <i class="icon icon-camera"></i>
+                <span class="tabbar-label">Label 1</span>
+            </a>
+            
+            <a href="incorrectP2.html" class="tab-link">
+                <i class="icon icon-camera"></i>
+                <span class="tabbar-label">Label 1</span>
+            </a>
+            
+            <a href="incorrectP2.html" class="tab-link">
+                <i class="icon icon-camera"></i>
+                <span class="tabbar-label">Label 1</span>
+            </a>
+            
+            <a href="#tab-4" class="tab-link">
+                <i class="icon icon-camera"></i>
+                <span class="tabbar-label">Label 1</span>
+            </a>
+            <a href="#tab-5" class="tab-link">
+                <i class="icon icon-camera"></i>
+                <span class="tabbar-label">More</span>
+            </a>
         </div>
-    <!-- Pattern 1 View -->
-    <!-- <div class="view view-p1">
-            <div class="pages">
-              <div data-page="index" class="page">
-                <div class="page-content login-screen-content">
-                <div class="list-block-label">This is pattern 1</div>
-                  <form>
-                    <div class="list-block">
-                      <ul>
-                        <li class="item-content">
-                          <div class="item-inner"> 
-                            <div class="item-input">
-                              <input type="text" name="participant" placeholder="Your participant number"/>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="item-content">
-                        </li>
-                      </ul>
-                    </div>
-                  <div class="content-block"><p><a href="instructions.html" class="button button-big button-fill">Submit</a></p></div>
-                  </form>
-                </div>
-              </div>
-            </div>
-        </div> --> 
-      </div>    
     </div>
-      
+
+          </div>
+ 
+        </div>
+    </div>
+  </div>
     <script type="text/javascript" src="js/framework7.min.js"></script>
     <script type="text/javascript" src="js/my-app.js"></script>
     <script type="text/javascript" src="js/experiment.js"></script>
+    <script type="text/javascript" src="js/experimentButtons.js"></script>
   </body>
+  
 </html>
