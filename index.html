@@ -4,10 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <!-- Path to Framework7 Library CSS-->
-    <link rel="stylesheet" href="css/framework7.ios.min.css">
-    <!-- Path to your custom app styles-->
-    <link rel="stylesheet" href="css/my-app.css">
+    <!-- Framework7 Library CSS Dynamically added-->
   </head>
   <body>
     <div class="statusbar-overlay"></div>
@@ -61,8 +58,8 @@
               <div class="content-block">
                 <p><strong>Select a navigation pattern</strong></p>
                 <p>Please refer to your participant paper and select a pattern.</p>
-                <p><a href="#p1Go" class="button button-big button-fill">Pattern 1</a></p>
-                <p><a href="#p2Go" class="button button-big button-fill">Pattern 2</a></p>
+                <p><a href="#p1Go" id = "buttonStartPattern" class="button button-big button-fill">Pattern 1</a></p>
+                <p><a href="#p2Go" id = "buttonStartPattern" class="button button-big button-fill">Pattern 2</a></p>
               </div>
             </div>
           </div>
@@ -70,8 +67,8 @@
           <!-- pattern 1 pages -->
           <div data-page="p1Go" class="page cached no-toolbar no-navbar no-swipeback">
             <div class="page-content login-screen-content">
-              <div class="list-block-label">Find: 05</div>
-              <div class="content-block"><p><a href="#pattern1" class="button button-big button-fill">Go</a></p></div>
+              <div id= "targetText" class="list-block-label">Find: 05</div>
+              <div class="content-block"><p><a href="#pattern1" id="buttonStart" class="button button-big button-fill">Go</a></p></div>
               <div class="list-block-label">Task remaining: 59</div>
             </div>
           </div>
@@ -198,16 +195,28 @@
             <div class="page-content login-screen-content">
                 <div class="content-block">	
                     <div class="login-screen-title">Correct!</div>
+                    <div class="list-block-label">Completion time: <strong id="resultDisplay">0:12 seconds</strong></div>
+                    <div class="list-block-label"></div>        
+                    <div class="row">
+                </div> 
+              </div>
+                <div class="col-100"><a href="#p1Go" id="buttonStartTrial" class="button button-big button-fill color-green">Next</a></div>
+            </div>
+          </div>
+          <div data-page="correctP2" class="page cached no-toolbar no-navbar">
+            <div class="page-content login-screen-content">
+                <div class="content-block">	
+                    <div class="login-screen-title">Correct!</div>
                     <div class="list-block-label">Completion time: <strong>0:12 seconds</strong></div>
                     <div class="list-block-label"></div>        
                     <div class="row">
                 </div> 
               </div>
-                <div class="col-100"><a href="#pattern1" class="button button-big button-fill color-green">Next</a></div>
+                <div class="col-100"><a href="#p2Go" id="buttonStart" class="button button-big button-fill color-green">Next</a></div>
             </div>
           </div>
         
-          <!-- correct pages -->
+          <!-- incorrect pages -->
           <div data-page="incorrectP1" class="page cached no-toolbar no-navbar">
             <div class="page-content login-screen-content">
                 <div class="content-block">	
@@ -217,7 +226,19 @@
                     <div class="row">
                 </div> 
               </div>
-                <div class="col-100"><a href="#pattern1" class="button button-big button-fill color-green">Try again</a></div>
+                <div class="col-100"><a href="#p1Go" id="buttonStartTrialIncorrect" class="button button-big button-fill color-green">Try again</a></div>
+            </div>
+          </div>
+        <div data-page="incorrectP2" class="page cached no-toolbar no-navbar">
+            <div class="page-content login-screen-content">
+                <div class="content-block">	
+                    <div class="login-screen-title">Incorrect!</div>
+                    <div class="list-block-label">Please try again.</div>
+                    <div class="list-block-label"></div>        
+                    <div class="row">
+                </div> 
+              </div>
+                <div class="col-100"><a href="#p2Go" class="button button-big button-fill color-green">Try again</a></div>
             </div>
           </div>
         </div>
@@ -225,7 +246,9 @@
     <script type="text/javascript" src="js/framework7.min.js"></script>
     <script type="text/javascript" src="js/my-app.js"></script>
     <script type="text/javascript" src="js/experiment.js"></script>
-    <script type="text/javascript" src="js/experimentButtons.js"></script>
+    <script>
+
+    </script>
   </body>
   
 </html>

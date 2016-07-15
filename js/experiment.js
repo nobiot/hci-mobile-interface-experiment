@@ -17,10 +17,10 @@ var NOBexperiment = (function () {
         results = [],
         timeStart,
         timeEnd,
-        numberOfMenuItems      = 8, // default number of menu items
-        dictionary = ["Apple", "Orange", "Mango", "Açaí", "Ackee",
-                      "Banana", "Batuan", "Caimito", "Cantaloupe", "Chinese olive",
-                      "Date", "Durian", "Galia melon", "Grumichama", "Guava"
+        numberOfMenuItems      = 10, // default number of menu items
+        dictionary = ["01", "02", "03", "04", "05",
+                      "05", "06", "07", "08", "09",
+                      "10", "11", "12", "13", "14"
                      ], // words taken from https://en.wikipedia.org/wiki/List_of_culinary_fruits
         icons       = ["fa fa-hand-o-up", "fa fa-wheelchair-alt", "fa fa-area-chart", "fa fa-bed", "fa fa-check-circle-o",
                        "fa fa-flask", "fa fa-folder-open-o", "fa fa-globe", "fa fa-hdd-o", "fa fa-hotel",
@@ -32,23 +32,19 @@ var NOBexperiment = (function () {
         menuItemTarget,
         targetText,
         targetIcon;
-    
-    // Adding fontawesome to the web page
-    // <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    var link,
-        head;
-    link   =  document.createElement("link");
-    link.setAttribute("rel", "stylesheet");
-    link.setAttribute("href", "../css/font-awesome.min.css");
-    head = document.querySelector("head")
-                       .appendChild(link);
 
-    
+  
+    var buttonStartPattern = document.getElementById("buttonStartPattern").onclick = trialStart;
+    var buttonStartTrial   = document.getElementById("buttonStartTrial").onclick = trialStart; 
+    var buttonStart        = document.getElementById("buttonStart")
+                                     .onclick = function(){timeStart = Date.now();}
+    var biuttonStartTrialIncorrect = document.getElementById("buttonStartTrialIncorrect").onclick = trialStart;
+  
     function trialStart() {
         trialReset();
         menuCreate(numberOfMenuItems);
         targetDisplay();
-        timeStart = Date.now();
+        //timeStart = Date.now();
     }
     
     function trialEnd() {
@@ -71,8 +67,8 @@ var NOBexperiment = (function () {
             duration = timeEnd - timeStart;
         results[resultNth] = duration; // This needs to be before incrementing resultNumber
         resultNth += 1;
-        p.textContent = "Result " + resultNth + ": " + duration + " milliseconds";
-        resultDisplay.appendChild(p);
+        resultDisplay.textContent = duration + " milliseconds";
+        //resultDisplay.appendChild(p);
     }
 
     function menuCreate(n) {
@@ -113,8 +109,6 @@ var NOBexperiment = (function () {
             var li,
                 a,
                 itemContent,
-                itemMedia,
-                icon,
                 itemInner,
                 itemTitle;
             
@@ -122,10 +116,6 @@ var NOBexperiment = (function () {
             a  = document.createElement("a");
             itemContent = document.createElement("div");
             itemContent.setAttribute("class", "item-content");
-            itemMedia = document.createElement("div");
-            itemMedia.setAttribute("class", "item-media");
-            icon = document.createElement("i");
-            icon.setAttribute("class", menuItems[i+n]);
             itemInner = document.createElement("div");
             itemInner.setAttribute("class", "item-inner");
             itemTitle = document.createElement("div");
@@ -133,33 +123,29 @@ var NOBexperiment = (function () {
             itemTitle.textContent = menuItems[i];
             if(i==targetIndex) {
                 a.setAttribute("id", "menuItemTarget");
+                a.setAttribute("href", "#correctP1");
                 targetText = menuItems[i];
-                targetIcon = menuItems[i+n]; // icons are appended after the n texts, hence +n
+            } else {
+              a.setAttribute("href", "#incorrectP1");
             }
             itemInner.appendChild(itemTitle);
-            itemMedia.appendChild(icon);
-            itemContent.appendChild(itemMedia);
             itemContent.appendChild(itemInner);
             a.appendChild(itemContent);
             li.appendChild(a);
             ul.appendChild(li);
         }
-//        menuItemTarget = document.getElementById("menuItemTarget");
-//        menuItemTarget.onclick = trialEnd;
+        menuItemTarget = document.getElementById("menuItemTarget");
+        menuItemTarget.onclick = trialEnd;
     }
 
     function targetDisplay() {
         var textElement = document.getElementById("targetText");
-        textElement.textContent = targetText;
-        var iconElement = document.getElementById("targetIcon");
-        iconElement.setAttribute("class", targetIcon);
+        textElement.textContent = "Find: " + targetText;
     }
     
     function targetRemove() {
         var textElement = document.getElementById("targetText");
         textElement.textContent = "";
-        var iconElement = document.getElementById("targetIcon");
-        iconElement.removeAttribute("class");
     }
 
     // Public properties
