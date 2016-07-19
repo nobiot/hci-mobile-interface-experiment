@@ -43,25 +43,32 @@ var NOBexperiment = (function () {
         targetText,
         targetIcon;
 
-    $$( '#buttonStartPattern1' ).on('click', function () {
+    $$('#buttonStartPattern1').on('click', function() {
       trialStart();
       setPattern(1);
     });
   
-    $$( '#buttonStartPattern2' ).on('click', function () {
+    $$('#buttonStartPattern2').on('click', function() {
       trialStart();
       setPattern(2);
     });
   
+    $$('#buttonStart').on('click', function() {
+      timeStart = Date.now();
+    })
+  
     var buttonStartTrial   = document.getElementById("buttonStartTrial").onclick = trialStart; 
-    var buttonStart        = document.getElementById("buttonStart")
-                                     .onclick = function(){timeStart = Date.now();}
+//    var buttonStart        = document.getElementById("buttonStart")
+//                                     .onclick = function(){timeStart = Date.now();}
     var biuttonStartTrialIncorrect = document.getElementById("buttonStartTrialIncorrect").onclick = trialStart;
   
     function setPattern(p) {
       currentPattern = p;
+      
       var css = (p==1) ? 'css/framework7.material.min.css' : 'css/framework7.ios.min.css';
-      $$( '#themeCSS' ).attr( 'href', css);
+      $$( '#themeCSS' ).attr('href', css);
+      
+      $$('#buttonStart').attr('href', '#pattern'+p)
     }
   
     function trialStart() {
@@ -153,6 +160,55 @@ var NOBexperiment = (function () {
             li.appendChild(a);
             ul.appendChild(li);
         }
+      
+// Construction of tab bar based on the structure 
+
+      var tabBar      = $$('#tabbar'),
+          tabList     = [],
+          moreTabMenu = $$('#moreTabList'),
+          moreTabList = [];          
+      
+// Assuming the menu items (menuItems[]) are always equal or greater than 5 
+      for (var i=0; i<5; i++) {
+        
+        var tabHref = (i==targetIndex) ? 'href="#correctTab" ' : 'href="#incorrectTab" ';
+        
+        tabList.push( '<a ' + tabHref + 'class="tab-link">' +
+                      '<span class="item-label">' +
+                      menuItems[i] +
+                      '</span>' +
+                      '</a>'
+                    );
+      }
+      //Adding the 5th one "More"
+      tabList.push( '<a href="#moreTab" class="tab-link">' +
+                      '<span class="item-label">' +
+                      'More' +
+                      '</span>' +
+                      '</a>'
+                    );
+      
+      tabBar.append(tabList.join(''));
+      
+      for (var i=5; i<n; i++) {
+        
+        var moreHref = (i==targetIndex) ? 'href="#correctP2" ' : 'href="#incorrectP2" ';
+        
+        moreTabList.push('<li>' +
+                         '<a ' + moreHref + 'class="item-link">' +
+                         '<div class="item-content">' +
+                         '<div class="item-inner">' +
+                         '<div class="item-title">' +
+                         menuItems[i] +
+                         '</div></div></div></a></li>'
+                        );
+      }
+      moreTabMenu.append(moreTabList.join(''));
+      
+      
+      
+// Enabling the button for the target menu item
+  
         menuItemTarget = document.getElementById("menuItemTarget");
         menuItemTarget.onclick = trialEnd;
     }

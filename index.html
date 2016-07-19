@@ -59,44 +59,30 @@
               <div class="content-block">
                 <p><strong>Select a navigation pattern</strong></p>
                 <p>Please refer to your participant paper and select a pattern.</p>
-                <p><a href="#p1Go" id = "buttonStartPattern1" class="button button-big button-fill">Pattern 1</a></p>
-                <p><a href="#p2Go" id = "buttonStartPattern2" class="button button-big button-fill">Pattern 2</a></p>
+                <p><a href="#Go" id = "buttonStartPattern1" class="button button-big button-fill">Pattern 1</a></p>
+                <p><a href="#Go" id = "buttonStartPattern2" class="button button-big button-fill">Pattern 2</a></p>
               </div>
             </div>
           </div>
             
-          <!-- pattern 1 pages -->
-          <div data-page="p1Go" class="page cached no-toolbar no-navbar no-swipeback">
+            
+          <!-- Go! Page -->
+          <div data-page="Go" class="page cached no-toolbar no-navbar no-swipeback">
             <div class="page-content login-screen-content">
-              <div id= "targetText" class="list-block-label">Find: 05</div>
-              <div class="content-block"><p><a href="#pattern1" id="buttonStart" class="button button-big button-fill">Go</a></p></div>
+              <div id= "targetText" class="list-block-label"><!-- Dynamic: Target Menu Item --></div>
+              <div class="content-block"><p><a href="#" id="buttonStart" class="button button-big button-fill">Go</a></p></div>
               <div class="list-block-label">Task remaining: 59</div>
             </div>
           </div>
+            
+          <!-- pattern 1 page -->
           <div data-page="pattern1" class="page cached navbar-through no-toolbar no-swipeback">
           <div class="panel-overlay"></div>
               <div class="panel panel-left panel-cover">
                   <div class="content-block">
                       <div class="list-block">
                           <ul id="navigationMenu">
-                            <li class="item-link close-panel">
-                                <div class="item-content selected">
-                                  <div class="item-inner">
-                                    <div class="item-title">01</div>
-                                  </div>
-                                </div></a></li>
-                            <li><a href="#correctP1" class="item-link close-panel">
-                                <div class="item-content">
-                                  <div class="item-inner">
-                                    <div class="item-title">02</div>
-                                  </div>
-                                </div></a></li>
-                            <li><a href="#incorrectP1" class="item-link close-panel">
-                                <div class="item-content">
-                                  <div class="item-inner">
-                                    <div class="item-title">03</div>
-                                  </div>
-                                </div></a></li>
+                            <!-- Dynamically added by experiment.js-->
                           </ul>
                       </div>
                   </div>
@@ -108,24 +94,15 @@
                           <i class="icon icon-bars"></i>
                       </a>
                     </div>
-                  <div class="left">05</div>
+                  <!--<div class="left">05</div>-->
                 </div>
               </div>
           </div>
           <!-- pattern 2 pages -->
-          <div data-page="p2Go" class="page cached no-toolbar no-navbar">
-            <div class="page-content login-screen-content">
-            <div class="list-block-label ">Find: 05</div>
-              <div class="content-block">
-                  <p><a href="#pattern2" class="button button-big button-fill" id="buttonStart">Go</a></p>
-                </div>
-              <div class="list-block-label">Task remaining: 59</div>
-            </div>
-          </div>
           <div data-page="pattern2" class="page cached navbar-through">
                 <div class="page-content">
                   <div class="tabs">
-                      <div id="tab-4" class="tab">
+                      <div id="incorrectTab" class="tab">
                           <div class="content-block">	
                               <div class="login-screen-title">Incorrect!</div>
                               <div class="list-block-label">Please try again.</div>
@@ -134,9 +111,10 @@
                           </div>
                           <div class="col-100"><a href="pattern-2-precue.html" class="button button-big button-fill color-green">Try again</a></div>
                       </div>
-                      <div id="tab-5" class="tab">
+                      <div id="moreTab" class="tab">
                          <div class="list-block">
-                          <ul>
+                          <ul id="moreTabList">
+<!-- Dynamically generated
                             <li>
                             <a href="#correctP1" class="item-link">
                               <div class="item-content">
@@ -155,6 +133,7 @@
                                   </div>
                               </a>
                               </li>  
+-->
                           </ul>
                         </div>
                       </div>
@@ -162,30 +141,27 @@
                 </div>
             
           <div class="toolbar tabbar tabbar-labels toolbar-through">
-        <div class="toolbar-inner">
-            <a href="incorrectP2.html" class="tab-link">
-                <i class="icon icon-camera"></i>
+        <div id="tabbar" class="toolbar-inner">
+<!-- Dynamically generated
+            <a href="#" class="tab-link">
                 <span class="tabbar-label">Label 1</span>
             </a>
             
-            <a href="incorrectP2.html" class="tab-link">
-                <i class="icon icon-camera"></i>
+            <a href="#" class="tab-link">
                 <span class="tabbar-label">Label 1</span>
             </a>
             
-            <a href="incorrectP2.html" class="tab-link">
-                <i class="icon icon-camera"></i>
+            <a href="#" class="tab-link">
                 <span class="tabbar-label">Label 1</span>
             </a>
             
-            <a href="#tab-4" class="tab-link">
-                <i class="icon icon-camera"></i>
+            <a href="#" class="tab-link">
                 <span class="tabbar-label">Label 1</span>
             </a>
-            <a href="#tab-5" class="tab-link">
-                <i class="icon icon-camera"></i>
+            <a href="#moreTab" class="tab-link">
                 <span class="tabbar-label">More</span>
             </a>
+-->
         </div>
     </div>
 
@@ -201,7 +177,7 @@
                     <div class="row">
                 </div> 
               </div>
-                <div class="col-100"><a href="#p1Go" id="buttonStartTrial" class="button button-big button-fill color-green">Next</a></div>
+                <div class="col-100"><a href="#Go" id="buttonStartTrial" class="button button-big button-fill color-green">Next</a></div>
             </div>
           </div>
           <div data-page="correctP2" class="page cached no-toolbar no-navbar">
@@ -213,7 +189,7 @@
                     <div class="row">
                 </div> 
               </div>
-                <div class="col-100"><a href="#p2Go" id="buttonStart" class="button button-big button-fill color-green">Next</a></div>
+                <div class="col-100"><a href="#Go" id="buttonStart" class="button button-big button-fill color-green">Next</a></div>
             </div>
           </div>
         
@@ -227,10 +203,10 @@
                     <div class="row">
                 </div> 
               </div>
-                <div class="col-100"><a href="#p1Go" id="buttonStartTrialIncorrect" class="button button-big button-fill color-green">Try again</a></div>
+                <div class="col-100"><a href="#Go" id="buttonStartTrialIncorrect" class="button button-big button-fill color-green">Try again</a></div>
             </div>
           </div>
-        <div data-page="incorrectP2" class="page cached no-toolbar no-navbar">
+          <div data-page="incorrectP2" class="page cached no-toolbar no-navbar">
             <div class="page-content login-screen-content">
                 <div class="content-block">	
                     <div class="login-screen-title">Incorrect!</div>
@@ -239,7 +215,7 @@
                     <div class="row">
                 </div> 
               </div>
-                <div class="col-100"><a href="#p2Go" class="button button-big button-fill color-green">Try again</a></div>
+                <div class="col-100"><a href="#Go" class="button button-big button-fill color-green">Try again</a></div>
             </div>
           </div>
         </div>
