@@ -18,16 +18,25 @@ var NOBexperiment = (function () {
         currentPattern,
         timeStart,
         timeEnd,
-        numberOfMenuItems      = 10, // default number of menu items
-        dictionary = ["01", "02", "03", "04", "05",
-                      "05", "06", "07", "08", "09",
-                      "10", "11", "12", "13", "14"
-                     ], // words taken from https://en.wikipedia.org/wiki/List_of_culinary_fruits
-        icons       = ["fa fa-hand-o-up", "fa fa-wheelchair-alt", "fa fa-area-chart", "fa fa-bed", "fa fa-check-circle-o",
-                       "fa fa-flask", "fa fa-folder-open-o", "fa fa-globe", "fa fa-hdd-o", "fa fa-hotel",
-                       "fa fa-keyboard-o", "fa fa-mobile", "fa fa-recycle", "fa fa-search", "fa fa-space-shuttle"
-                     ],
-        numberOfTrialCurrent = 0, // Current Nth trial
+        numberOfMenuItems      = 10,  // default number of menu items displayed
+        numberOfMenuCandiates  = 99, // 1-n menu items will be used to randomly generate the menu
+        dictionary = [];
+        for(var i=1; i<=numberOfMenuCandiates; i++) {
+          //Padding with 0 in front.
+          
+          var lenMax      = numberOfMenuCandiates.toString().length,
+              a           = String(i),
+              lenCurrent  = a.length;
+          
+          while (lenCurrent<lenMax){
+            a = '0' + a;
+            lenCurrent  = a.length;
+          }
+          
+          dictionary.push(a);
+        }
+
+    var numberOfTrialCurrent = 0, // Current Nth trial
         numberOfTrials        = 10, // Number of repeats in one experiment. Vague. per block or the whole?
         resultNth = 0, // Current Nth Trial
         menuItemTarget,
@@ -82,7 +91,7 @@ var NOBexperiment = (function () {
             duration = timeEnd - timeStart;
         results[resultNth] = duration; // This needs to be before incrementing resultNumber
         resultNth += 1;
-        resultDisplay.textContent = duration + " milliseconds";
+        resultDisplay.textContent = (duration/1000) + " seconds";
         //resultDisplay.appendChild(p);
     }
 
@@ -90,15 +99,10 @@ var NOBexperiment = (function () {
         var menuItems = [],
             counter = 0,
             targetIndex = Math.floor((Math.random() * n)); //get a number from 0 to n-1 to be the index of the target
-        while (counter < n * 2) {// x2 because text (0 to n-1) and icon (n to n-1)
+        while (counter < n) {
             // Randomly pick an item from the dictionary of any length.
-            var item;
-            // Below both texts and icons are separately chosen; they are not paired in a fixed way.
-            if (counter < n) { // text: from index 0 to n-1
-                item = dictionary[Math.floor((Math.random() * dictionary.length))];
-            } else { // icon: from index n to n*2-1
-                item = icons[Math.floor((Math.random() * icons.length))]  + " fa-fw"; // fixed width for fontawesome
-            }
+            var item = dictionary[Math.floor((Math.random() * dictionary.length))];
+ 
             // Add the item only when it is already in the menuItems array.
             if (!menuItems.includes(item)) {
                 menuItems[counter] = item;
