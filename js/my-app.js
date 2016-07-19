@@ -9,12 +9,5 @@ var mainView = myApp.addView('.view-main', {
     domCache: true
 });
 
-var materialCSS = function() {
-  $$('head').append('<link rel="stylesheet" href="css/framework7.material.min.css">');
-}
-
-var iOSCSS = function() {
-  $$('head').append('<link rel="stylesheet" href="css/framework7.ios.min.css">');
-}
-
-materialCSS();
+// Theme CSS added with id=themeCSS, which is used to dynamically swap with material
+$$('head').append('<link rel="stylesheet" id=themeCSS href="css/framework7.material.min.css">');

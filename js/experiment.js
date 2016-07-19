@@ -13,8 +13,9 @@ var NOBexperiment = (function () {
     //Object to be return to provide public properties to the caller
     var experiment = {},
     
-    // Private properties   
+    //properties   
         results = [],
+        currentPattern,
         timeStart,
         timeEnd,
         numberOfMenuItems      = 10, // default number of menu items
@@ -33,12 +34,26 @@ var NOBexperiment = (function () {
         targetText,
         targetIcon;
 
+    $$( '#buttonStartPattern1' ).on('click', function () {
+      trialStart();
+      setPattern(1);
+    });
   
-    var buttonStartPattern = document.getElementById("buttonStartPattern").onclick = trialStart;
+    $$( '#buttonStartPattern2' ).on('click', function () {
+      trialStart();
+      setPattern(2);
+    });
+  
     var buttonStartTrial   = document.getElementById("buttonStartTrial").onclick = trialStart; 
     var buttonStart        = document.getElementById("buttonStart")
                                      .onclick = function(){timeStart = Date.now();}
     var biuttonStartTrialIncorrect = document.getElementById("buttonStartTrialIncorrect").onclick = trialStart;
+  
+    function setPattern(p) {
+      currentPattern = p;
+      var css = (p==1) ? 'css/framework7.material.min.css' : 'css/framework7.ios.min.css';
+      $$( '#themeCSS' ).attr( 'href', css);
+    }
   
     function trialStart() {
         trialReset();
@@ -153,8 +168,6 @@ var NOBexperiment = (function () {
         results[0] = 1;
         return results;
     }
-    
-    experiment.getFuncStart = trialStart;
     
     return experiment;
     
