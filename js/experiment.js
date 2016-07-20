@@ -1,11 +1,12 @@
 // Browser limitation
 // array.includes(element) is not supported on all platforms (notably, IE and Edge do not).
 // TODO
-// - Random numbers
+// DONE- Random numbers
+// - Flow - Go > Correct/Incorrect > Next
 // - Remember the user
 // - Count the trials
 // - Save with User
-// - Mix material and ios themes
+// DONE- Mix material and ios themes
 
 var NOBexperiment = (function () {
     'use strict';
@@ -174,7 +175,7 @@ var NOBexperiment = (function () {
         var tabHref = (i==targetIndex) ? 'href="#correctTab" ' : 'href="#incorrectTab" ';
         
         tabList.push( '<a ' + tabHref + 'class="tab-link">' +
-                      '<span class="item-label">' +
+                      '<span class="tabbar-label">' +
                       menuItems[i] +
                       '</span>' +
                       '</a>'
@@ -182,7 +183,7 @@ var NOBexperiment = (function () {
       }
       //Adding the 5th one "More"
       tabList.push( '<a href="#moreTab" class="tab-link">' +
-                      '<span class="item-label">' +
+                      '<span class="tabbar-label">' +
                       'More' +
                       '</span>' +
                       '</a>'
