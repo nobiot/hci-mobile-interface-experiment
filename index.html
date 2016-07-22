@@ -102,41 +102,53 @@
           <div data-page="pattern2" class="page cached navbar-through">
                 <div class="page-content">
                   <div class="tabs">
-                      <div id="incorrectTab" class="tab">
-                          <div class="content-block">	
-                              <div class="login-screen-title">Incorrect!</div>
-                              <div class="list-block-label">Please try again.</div>
-                              <div class="list-block-label"></div>        
-                              <div class="row"></div> 
-                          </div>
-                          <div class="col-100"><a href="pattern-2-precue.html" class="button button-big button-fill color-green">Try again</a></div>
-                      </div>
-                      <div id="moreTab" class="tab">
-                         <div class="list-block">
-                          <ul id="moreTabList">
-<!-- Dynamically generated
-                            <li>
-                            <a href="#correctP1" class="item-link">
-                              <div class="item-content">
-                                      <div class="item-inner"> 
-                                          <div class="item-title">05</div>
-                                      </div>
-                                  </div>
-                              </a>
-                              </li>
-                            <li>
-                            <a href="correctP2.html" class="item-link">
-                              <div class="item-content">
-                                      <div class="item-inner"> 
-                                          <div class="item-title">06</div>
-                                      </div>
-                                  </div>
-                              </a>
-                              </li>  
--->
-                          </ul>
+                    <div id="defaultTab" class="tab">
+                    </div>
+                    <div id="correctTab" class="tab">
+                        <div class="content-block">	
+                            <div class="login-screen-title">Correct!</div>
+                            <div class="list-block-label">Completion time: <strong class="resultDisplay">n:nn seconds</strong></div>
+                            <div class="list-block-label"></div>        
+
+                            <div class="row"></div> 
                         </div>
+                        <div class="col-100"><a href="#Go" class="buttonStartTrial button button-big button-fill color-green">Next</a></div>
+                    </div>
+                    <div id="incorrectTab" class="tab">
+                        <div class="content-block">	
+                            <div class="login-screen-title">Incorrect!</div>
+                            <div class="list-block-label">Please try again.</div>
+                            <div class="list-block-label"></div>        
+                            <div class="row"></div> 
+                        </div>
+                        <div class="col-100"><a href="#Go" class="buttonStartTrialIncorrect button button-big button-fill color-green">Try again</a></div>
+                    </div>
+                    <div id="moreTab" class="tab">
+                       <div class="list-block">
+                        <ul id="moreTabList">
+<!-- Dynamically generated
+                          <li>
+                          <a href="#correctP1" class="item-link">
+                            <div class="item-content">
+                                    <div class="item-inner"> 
+                                        <div class="item-title">05</div>
+                                    </div>
+                                </div>
+                            </a>
+                            </li>
+                          <li>
+                          <a href="correctP2.html" class="item-link">
+                            <div class="item-content">
+                                    <div class="item-inner"> 
+                                        <div class="item-title">06</div>
+                                    </div>
+                                </div>
+                            </a>
+                            </li>  
+-->
+                        </ul>
                       </div>
+                    </div>
                   </div>
                 </div>
             
@@ -166,35 +178,21 @@
     </div>
 
           </div>
-        
           <!-- correct pages -->
-          <div data-page="correctP1" class="page cached no-toolbar no-navbar">
+          <div data-page="correct" class="page cached no-toolbar no-navbar">
             <div class="page-content login-screen-content">
                 <div class="content-block">	
                     <div class="login-screen-title">Correct!</div>
-                    <div class="list-block-label">Completion time: <strong id="resultDisplay">0:12 seconds</strong></div>
+                    <div class="list-block-label">Completion time: <strong class="resultDisplay">n:nn seconds</strong></div>
                     <div class="list-block-label"></div>        
                     <div class="row">
                 </div> 
               </div>
-                <div class="col-100"><a href="#Go" id="buttonStartTrial" class="button button-big button-fill color-green">Next</a></div>
+                <div class="col-100"><a href="#Go" class="buttonStartTrial button button-big button-fill color-green">Next</a></div>
             </div>
-          </div>
-          <div data-page="correctP2" class="page cached no-toolbar no-navbar">
-            <div class="page-content login-screen-content">
-                <div class="content-block">	
-                    <div class="login-screen-title">Correct!</div>
-                    <div class="list-block-label">Completion time: <strong>0:12 seconds</strong></div>
-                    <div class="list-block-label"></div>        
-                    <div class="row">
-                </div> 
-              </div>
-                <div class="col-100"><a href="#Go" id="buttonStart" class="button button-big button-fill color-green">Next</a></div>
-            </div>
-          </div>
-        
+          </div>      
           <!-- incorrect pages -->
-          <div data-page="incorrectP1" class="page cached no-toolbar no-navbar">
+          <div data-page="incorrect" class="page cached no-toolbar no-navbar">
             <div class="page-content login-screen-content">
                 <div class="content-block">	
                     <div class="login-screen-title">Incorrect!</div>
@@ -203,19 +201,7 @@
                     <div class="row">
                 </div> 
               </div>
-                <div class="col-100"><a href="#Go" id="buttonStartTrialIncorrect" class="button button-big button-fill color-green">Try again</a></div>
-            </div>
-          </div>
-          <div data-page="incorrectP2" class="page cached no-toolbar no-navbar">
-            <div class="page-content login-screen-content">
-                <div class="content-block">	
-                    <div class="login-screen-title">Incorrect!</div>
-                    <div class="list-block-label">Please try again.</div>
-                    <div class="list-block-label"></div>        
-                    <div class="row">
-                </div> 
-              </div>
-                <div class="col-100"><a href="#Go" class="button button-big button-fill color-green">Try again</a></div>
+                <div class="col-100"><a href="#Go" class="buttonStartTrialIncorrect button button-big button-fill color-green">Try again</a></div>
             </div>
           </div>
         </div>

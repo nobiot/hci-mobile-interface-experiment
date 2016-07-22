@@ -56,12 +56,18 @@ var NOBexperiment = (function () {
   
     $$('#buttonStart').on('click', function() {
       timeStart = Date.now();
-    })
+    });
+    
+    $$('.buttonStartTrial').on('click', function() {
+      trialStart();
+    });
   
-    var buttonStartTrial   = document.getElementById("buttonStartTrial").onclick = trialStart; 
+//    var buttonStartTrial   = document.getElementById("buttonStartTrial").onclick = trialStart; 
 //    var buttonStart        = document.getElementById("buttonStart")
 //                                     .onclick = function(){timeStart = Date.now();}
-    var biuttonStartTrialIncorrect = document.getElementById("buttonStartTrialIncorrect").onclick = trialStart;
+    $$('.buttonStartTrialIncorrect').on('click', function() {
+       trialStart();
+    });
   
     function setPattern(p) {
       currentPattern = p;
@@ -86,20 +92,27 @@ var NOBexperiment = (function () {
     }
 
     function trialReset() {
-        var ul = document.getElementById("navigationMenu");
-        while (ul.firstChild) {
-            ul.removeChild(ul.firstChild);
+        if (currentPattern == 1) {
+        // Resetting Pattern 1 (slide menu)
+          var ul = document.getElementById("navigationMenu");
+          while (ul.firstChild) {
+              ul.removeChild(ul.firstChild);
+          }
+          targetRemove();
+        } else {
+        // Resetting Pattern 2 (tabbar)
+          $$('#tabbar').children().remove();
+          $$('#moreTabList').children().remove();
+          myApp.showTab('#defaultTab');
         }
-        targetRemove();
     }
 
     function trialResultWrite() {
-        var resultDisplay = document.getElementById("resultDisplay"),
-            p = document.createElement("p"),
+        var resultDisplay = $$('.resultDisplay'),
             duration = timeEnd - timeStart;
         results[resultNth] = duration; // This needs to be before incrementing resultNumber
         resultNth += 1;
-        resultDisplay.textContent = (duration/1000) + " seconds";
+        resultDisplay.text(duration/1000 + " seconds");
         //resultDisplay.appendChild(p);
     }
 
@@ -150,10 +163,10 @@ var NOBexperiment = (function () {
             itemTitle.textContent = menuItems[i];
             if(i==targetIndex) {
                 a.setAttribute("id", "menuItemTarget");
-                a.setAttribute("href", "#correctP1");
+                a.setAttribute("href", "#correct");
                 targetText = menuItems[i];
             } else {
-              a.setAttribute("href", "#incorrectP1");
+              a.setAttribute("href", "#incorrect");
             }
             itemInner.appendChild(itemTitle);
             itemContent.appendChild(itemInner);
@@ -172,7 +185,7 @@ var NOBexperiment = (function () {
 // Assuming the menu items (menuItems[]) are always equal or greater than 5 
       for (var i=0; i<5; i++) {
         
-        var tabHref = (i==targetIndex) ? 'href="#correctTab" ' : 'href="#incorrectTab" ';
+        var tabHref = (i==targetIndex) ? 'href="#correctTab" id="menuItemTarget" ' : 'href="#incorrectTab" ';
         
         tabList.push( '<a ' + tabHref + 'class="tab-link">' +
                       '<span class="tabbar-label">' +
@@ -193,7 +206,7 @@ var NOBexperiment = (function () {
       
       for (var i=5; i<n; i++) {
         
-        var moreHref = (i==targetIndex) ? 'href="#correctP2" ' : 'href="#incorrectP2" ';
+        var moreHref = (i==targetIndex) ? 'href="#correct" id="menuItemTarget" ' : 'href="#incorrect" ';
         
         moreTabList.push('<li>' +
                          '<a ' + moreHref + 'class="item-link">' +
