@@ -45,13 +45,13 @@ var NOBexperiment = (function () {
         targetIcon;
 
     $$('#buttonStartPattern1').on('click', function() {
-      trialStart();
       setPattern(1);
+      trialStart();
     });
   
     $$('#buttonStartPattern2').on('click', function() {
-      trialStart();
       setPattern(2);
+      trialStart();
     });
   
     $$('#buttonStart').on('click', function() {
@@ -130,7 +130,21 @@ var NOBexperiment = (function () {
                 counter += 1;
             }//Repeat and pick an item again if it is already in the array.
         }
-// Construction the unordered list (ul) for the menu based on Framework7's structure as follows:
+      
+        targetText = menuItems[targetIndex];
+      
+        if (currentPattern == 1) {
+          menuCreatePattern1(menuItems, targetIndex, n);
+        } else {
+          menuCreatePattern2(menuItems, targetIndex, n);
+        }
+
+      // Enabling the button for the target menu item
+        menuItemTarget = document.getElementById("menuItemTarget");
+        menuItemTarget.onclick = trialEnd;
+    }
+    function menuCreatePattern1(menuItems, targetIndex, n) {
+      // Construction the unordered list (ul) for the menu based on Framework7's structure as follows:
 //                   <li>
 //                    <a class="item-link close-panel" href="forms.html">
 //                        <div class="item-content">
@@ -164,7 +178,6 @@ var NOBexperiment = (function () {
             if(i==targetIndex) {
                 a.setAttribute("id", "menuItemTarget");
                 a.setAttribute("href", "#correct");
-                targetText = menuItems[i];
             } else {
               a.setAttribute("href", "#incorrect");
             }
@@ -175,14 +188,15 @@ var NOBexperiment = (function () {
             ul.appendChild(li);
         }
       
-// Construction of tab bar based on the structure 
-
+    }
+    function menuCreatePattern2(menuItems, targetIndex, n) {
+      // Construction of tab bar based on the structure 
       var tabBar      = $$('#tabbar'),
           tabList     = [],
           moreTabMenu = $$('#moreTabList'),
           moreTabList = [];          
       
-// Assuming the menu items (menuItems[]) are always equal or greater than 5 
+      // Assuming the menu items (menuItems[]) are always equal or greater than 5 
       for (var i=0; i<5; i++) {
         
         var tabHref = (i==targetIndex) ? 'href="#correctTab" id="menuItemTarget" ' : 'href="#incorrectTab" ';
@@ -219,12 +233,6 @@ var NOBexperiment = (function () {
       }
       moreTabMenu.append(moreTabList.join(''));
       
-      
-      
-// Enabling the button for the target menu item
-  
-        menuItemTarget = document.getElementById("menuItemTarget");
-        menuItemTarget.onclick = trialEnd;
     }
 
     function targetDisplay() {
