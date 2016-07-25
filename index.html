@@ -48,7 +48,7 @@
                   <li><p>You will be asked to search for a target within two different navigation patterns.</p></li>
                   <li><p>Before each search trial, you will be given a hint of the target using an pre-cue number.</p></li>
                   <li><p>There will we a total of 60 trials within each of the two blocks in this experiment.</p></ul><br>
-                <p><a href="#pattern-selector" class="button button-big button-fill">Continue</a></p></
+                <p><a href="#pattern-selector" id="buttonToPatternSelector" class="button button-big button-fill">Continue</a></p></
               </div>
             </div>
           </div>
@@ -71,7 +71,7 @@
             <div class="page-content login-screen-content">
               <div id= "targetText" class="list-block-label"><!-- Dynamic: Target Menu Item --></div>
               <div class="content-block"><p><a href="#" id="buttonStart" class="button button-big button-fill">Go</a></p></div>
-              <div class="list-block-label">Task remaining: 59</div>
+              <div id="trialsToGo" class="list-block-label"></div>
             </div>
           </div>
             
@@ -202,6 +202,19 @@
                 </div> 
               </div>
                 <div class="col-100"><a href="#Go" class="buttonStartTrialIncorrect button button-big button-fill color-green">Try again</a></div>
+            </div>
+          </div>
+            
+          <div data-page="thank-you" class="page cached no-toolbar no-navbar">
+            <div class="page-content login-screen-content">
+                <div class="content-block">	
+                    <div class="login-screen-title">Thank you!</div>
+                    <div class="list-block-label">Experiment complete.</div>
+                    <div class="list-block-label"></div>        
+                    <div class="row">
+                </div> 
+              </div>
+                <div class="col-100"><a href="#" id="buttonThankYou" class="button button-big button-fill color-green">Finish</a></div>
             </div>
           </div>
         </div>

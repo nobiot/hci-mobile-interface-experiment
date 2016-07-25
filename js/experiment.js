@@ -17,6 +17,7 @@ var NOBexperiment = (function () {
     //properties   
         results = [],
         currentPattern,
+        finishedPatterns = [],
         timeStart,
         timeEnd,
         numberOfMenuItems      = 10,  // default number of menu items displayed
@@ -37,20 +38,20 @@ var NOBexperiment = (function () {
           dictionary.push(a);
         }
 
-    var numberOfTrialCurrent = 0, // Current Nth trial
-        numberOfTrials        = 10, // Number of repeats in one experiment. Vague. per block or the whole?
-        resultNth = 0, // Current Nth Trial
+    var numberOfTrialCurrent = 0, // Current Nth trial << This gets reset in every pattern
+        numberOfTrials       = 2, // Number of repeats in one pattern
+        resultNth = 0, // Current Nth Trial << This continues across patterns
         menuItemTarget,
         targetText,
         targetIcon;
-
+  
     $$('#buttonStartPattern1').on('click', function() {
-      setPattern(1);
+      patternSet(1);
       trialStart();
     });
   
     $$('#buttonStartPattern2').on('click', function() {
-      setPattern(2);
+      patternSet(2);
       trialStart();
     });
   
@@ -62,33 +63,60 @@ var NOBexperiment = (function () {
       trialStart();
     });
   
-//    var buttonStartTrial   = document.getElementById("buttonStartTrial").onclick = trialStart; 
-//    var buttonStart        = document.getElementById("buttonStart")
-//                                     .onclick = function(){timeStart = Date.now();}
     $$('.buttonStartTrialIncorrect').on('click', function() {
        trialStart();
     });
   
-    function setPattern(p) {
+    $$('#buttonThankYou').on('click', function() {
+      $$('a.buttonStartTrial').attr('href', '#Go');
+    });
+  
+    function patternSet(p) {
       currentPattern = p;
       
       var css = (p==1) ? 'css/framework7.material.min.css' : 'css/framework7.ios.min.css';
       $$( '#themeCSS' ).attr('href', css);
       
-      $$('#buttonStart').attr('href', '#pattern'+p)
+      $$('#buttonStart').attr('href', '#pattern'+p);
+    }
+    
+  function patternEnd() {
+      $$('a.buttonStartTrial').attr('href', '#thank-you');
+      finishedPatterns.push(currentPattern);
+      var nextPattern = (currentPattern == 1) ? 2 : 1; // swapping
+      patternSet(nextPattern);
+      numberOfTrialCurrent = 0;
+      
+      var button = $$('a#buttonThankYou');
+      var text;
+      var href
+      if (finishedPatterns.length < 2) {
+        text = "Continue" ;
+        href = "#Go";
+      } else {
+        text = "Finish" ;
+        href = "#";
+      }
+      button.text(text);
+      button.attr('href', href);
     }
   
     function trialStart() {
         trialReset();
         menuCreate(numberOfMenuItems);
         targetDisplay();
+        trialsToGO();
         //timeStart = Date.now();
     }
     
     function trialEnd() {
-        timeEnd = Date.now();
+        timeEnd = Date.now();      
         trialResultWrite();
         trialReset();
+        numberOfTrialCurrent += 1;
+        if (numberOfTrials - numberOfTrialCurrent == 0) {
+          patternEnd();
+        }
     }
 
     function trialReset() {
@@ -140,9 +168,11 @@ var NOBexperiment = (function () {
         }
 
       // Enabling the button for the target menu item
-        menuItemTarget = document.getElementById("menuItemTarget");
-        menuItemTarget.onclick = trialEnd;
+      $$('#menuItemTarget').on('click', function() {
+        trialEnd();
+      });
     }
+  
     function menuCreatePattern1(menuItems, targetIndex, n) {
       // Construction the unordered list (ul) for the menu based on Framework7's structure as follows:
 //                   <li>
@@ -189,6 +219,7 @@ var NOBexperiment = (function () {
         }
       
     }
+  
     function menuCreatePattern2(menuItems, targetIndex, n) {
       // Construction of tab bar based on the structure 
       var tabBar      = $$('#tabbar'),
@@ -243,6 +274,11 @@ var NOBexperiment = (function () {
     function targetRemove() {
         var textElement = document.getElementById("targetText");
         textElement.textContent = "";
+    }
+  
+    function trialsToGO() {
+      var nToGo = numberOfTrials - numberOfTrialCurrent;
+      $$('#trialsToGo').text('Task remaining: ' + nToGo);
     }
 
     // Public properties
