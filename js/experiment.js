@@ -2,10 +2,11 @@
 // array.includes(element) is not supported on all platforms (notably, IE and Edge do not).
 // TODO
 // DONE- Random numbers
-// - Flow - Go > Correct/Incorrect > Next
-// - Remember the user
-// - Count the trials
+// DONE Flow - Go > Correct/Incorrect > Next
+// DONE- Remember the user
+// DONE Count the trials
 // - Save with User
+// DONE Close side panel
 // DONE- Mix material and ios themes
 
 var NOBexperiment = (function () {
@@ -15,6 +16,7 @@ var NOBexperiment = (function () {
     var experiment = {},
     
     //properties   
+        pNumberData,
         results = [],
         currentPattern,
         finishedPatterns = [],
@@ -45,6 +47,15 @@ var NOBexperiment = (function () {
         targetText,
         targetIcon;
   
+    $$('#form-participant-submit').on('click', function() {
+      pNumberData = myApp.formToJSON('#form-participant-id');
+      if(pNumberData.participant) {
+        mainView.router.load({pageName: 'instructions'});
+      } else {
+        myApp.alert('Please enter your participant number.', 'Participant Number Missing');
+      }
+    });
+  
     $$('#buttonStartPattern1').on('click', function() {
       patternSet(1);
       trialStart();
@@ -71,6 +82,25 @@ var NOBexperiment = (function () {
       $$('a.buttonStartTrial').attr('href', '#Go');
     });
   
+    function saveExperiment() {
+        var o = {
+            participant: pNumberData.participant,
+            results: results
+        }      
+
+        if(results.length != 0){
+            var req = new XMLHttpRequest();
+            req.open("POST", "", false); // Syncronous call is deprecated. TODO
+            req.send(JSON.stringify(o));
+            console.log(req.responseText); 
+          
+            myApp.alert('The experiment is complete.', 'Thank You!');
+        }else{
+            // You cannot be here.
+        }
+      
+    }
+  
     function patternSet(p) {
       currentPattern = p;
       
@@ -80,7 +110,7 @@ var NOBexperiment = (function () {
       $$('#buttonStart').attr('href', '#pattern'+p);
     }
     
-  function patternEnd() {
+    function patternEnd() {
       $$('a.buttonStartTrial').attr('href', '#thank-you');
       finishedPatterns.push(currentPattern);
       var nextPattern = (currentPattern == 1) ? 2 : 1; // swapping
@@ -96,6 +126,7 @@ var NOBexperiment = (function () {
       } else {
         text = "Finish" ;
         href = "#";
+        button.once('click', saveExperiment); // probably this one should accept a callback to pop up confirmation
       }
       button.text(text);
       button.attr('href', href);
@@ -142,6 +173,11 @@ var NOBexperiment = (function () {
         resultNth += 1;
         resultDisplay.text(duration/1000 + " seconds");
         //resultDisplay.appendChild(p);
+    }
+  
+    function trialsToGO() {
+      var nToGo = numberOfTrials - numberOfTrialCurrent;
+      $$('#trialsToGo').text('Task remaining: ' + nToGo);
     }
 
     function menuCreate(n) {
@@ -211,6 +247,7 @@ var NOBexperiment = (function () {
             } else {
               a.setAttribute("href", "#incorrect");
             }
+            a.setAttribute("class", "close-panel");
             itemInner.appendChild(itemTitle);
             itemContent.appendChild(itemInner);
             a.appendChild(itemContent);
@@ -276,11 +313,6 @@ var NOBexperiment = (function () {
         textElement.textContent = "";
     }
   
-    function trialsToGO() {
-      var nToGo = numberOfTrials - numberOfTrialCurrent;
-      $$('#trialsToGo').text('Task remaining: ' + nToGo);
-    }
-
     // Public properties
     experiment.getResults = function() {
         results[0] = 1;
