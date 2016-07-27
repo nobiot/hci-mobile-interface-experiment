@@ -7,12 +7,14 @@ from http.server import BaseHTTPRequestHandler, HTTPServer, http
 import socketserver
 import logging
 import cgi
+import json
 
 # Port on which server will run.
 PORT = 8080
 # File path relative to the current directory
 # TODO file name should be dynamically determined.
 # Prhaps send a content from the app
+PREFIX    = "p"
 DIRECTORY = "results"
 EXTENSION = ".csv"
  
@@ -24,7 +26,8 @@ class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         data = self.rfile.read(int(length)) #TODO: Now I am sending JSON. Parse it to create unique file names
  
         # Write the data to a file in current dir.
-        filename = 'particpantN' + EXTENSION
+        print(json.loads(data.decode("utf-8")))
+        filename = PREFIX + json.loads(data.decode("utf-8"))['participant'] + EXTENSION
         path = os.path.join(os.getcwd(), DIRECTORY, filename)
         with open(path, 'wb') as file:
             file.write(data)
