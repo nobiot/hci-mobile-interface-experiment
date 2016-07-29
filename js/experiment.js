@@ -115,13 +115,17 @@ var NOBexperiment = (function () {
         }
       
     }
+    function patternSetCSS() {
+        var css = (patternCurrent==1) ? 'css/framework7.material.min.css' : 'css/framework7.ios.min.css';
+        $$( '#themeCSS' ).attr('href', css);
+    }
   
     function patternSet(p) {
       patternCurrent = p;
       
-      var css = (p==1) ? 'css/framework7.material.min.css' : 'css/framework7.ios.min.css';
-      $$( '#themeCSS' ).attr('href', css);
-      
+//      var css = (p==1) ? 'css/framework7.material.min.css' : 'css/framework7.ios.min.css';
+//      $$( '#themeCSS' ).attr('href', css);
+//      
       $$('#buttonStart').attr('href', '#pattern'+p);
     }
     
@@ -148,6 +152,7 @@ var NOBexperiment = (function () {
     }
   
     function trialStart() {
+        patternSetCSS();
         trialInfo = [];
         trialInfo.push(participant.number);
         trialInfo.push(patternCurrent);
