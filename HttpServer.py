@@ -8,6 +8,8 @@ import socketserver
 import logging
 import cgi
 import json
+import csv
+import collections
 
 # Port on which server will run.
 PORT = 8080
@@ -24,13 +26,22 @@ class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         # Get length of the data and read it.
         length = self.headers['content-length']
         data = self.rfile.read(int(length)) #TODO: Now I am sending JSON. Parse it to create unique file names
- 
+
         # Write the data to a file in current dir.
-        print(json.loads(data.decode("utf-8")))
-        filename = PREFIX + json.loads(data.decode("utf-8"))['participant'] + EXTENSION
+        
+        # json object is not sorted by the trial
+        # thus ordered dictionary object is used to sort by trial
+        s = json.loads(data.decode("utf-8"))
+        o = collections.OrderedDict(sorted(s.items()))
+        print(s)
+        print(o)
+        participant = o['1'][0]
+
+        filename = PREFIX + participant + EXTENSION
         path = os.path.join(os.getcwd(), DIRECTORY, filename)
-        with open(path, 'wb') as file:
-            file.write(data)
+        with open(path, 'w') as file:
+            w = csv.writer(file, 'excel')
+            w.writerows(o.values())
  
         # Send success response.
         self.send_header('Content-type', 'text/json')

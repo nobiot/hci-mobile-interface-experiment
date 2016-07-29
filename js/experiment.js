@@ -5,25 +5,47 @@
 // DONE Flow - Go > Correct/Incorrect > Next
 // DONE- Remember the user
 // DONE Count the trials
-// - Save with User
+// DONE Save with User
 // DONE Close side panel
 // DONE- Mix material and ios themes
+// - Look at Pukar's requirements in Messenger
+// - Adjust the timing of theme swapping to avoid the blue strip on top of screen
+//   when Pattern 2 is the first pattern (and finishes in the tab, not the list menu)
+// DONE Tabbar empty icon
+
+/* 
+Data to catpure for a trial
+- Participant ID
+- Trial Number
+- Navigation pattern
+- Target item
+- Item position
+- Selection time of item
+- Error count
+- Total trial duration
+*/
 
 var NOBexperiment = (function () {
     'use strict';
     
     //Object to be return to provide public properties to the caller
     var experiment = {},
-    
-    //properties   
-        pNumberData,
-        results = [],
-        currentPattern,
-        finishedPatterns = [],
-        timeStart,
-        timeEnd,
+        
+    // parameters that can / should be changed 
         numberOfMenuItems      = 10,  // default number of menu items displayed
         numberOfMenuCandiates  = 99, // 1-n menu items will be used to randomly generate the menu
+        numberOfTrials       = 1, // Number of repeats in one pattern
+    
+    //properties   
+        participant,
+        experimentResult = {}, // object to be sent
+        trialInfo = [], // list that holds the information of a given trial 
+        results = [],
+        patternCurrent,
+        patternsFinished = [],
+        timeStart,
+        timeEnd,
+        trialDuration,
         dictionary = [];
         for(var i=1; i<=numberOfMenuCandiates; i++) {
           //Padding with 0 in front.
@@ -39,17 +61,14 @@ var NOBexperiment = (function () {
           
           dictionary.push(a);
         }
-
     var numberOfTrialCurrent = 0, // Current Nth trial << This gets reset in every pattern
-        numberOfTrials       = 2, // Number of repeats in one pattern
         resultNth = 0, // Current Nth Trial << This continues across patterns
         menuItemTarget,
-        targetText,
-        targetIcon;
+        targetText;
   
     $$('#form-participant-submit').on('click', function() {
-      pNumberData = myApp.formToJSON('#form-participant-id');
-      if(pNumberData.participant) {
+      participant = myApp.formToJSON('#form-participant-id');
+      if(participant.number) {
         mainView.router.load({pageName: 'instructions'});
       } else {
         myApp.alert('Please enter your participant number.', 'Participant Number Missing');
@@ -83,15 +102,11 @@ var NOBexperiment = (function () {
     });
   
     function saveExperiment() {
-        var o = {
-            participant: pNumberData.participant,
-            results: results
-        }      
 
         if(results.length != 0){
             var req = new XMLHttpRequest();
             req.open("POST", "", false); // Syncronous call is deprecated. TODO
-            req.send(JSON.stringify(o));
+            req.send(JSON.stringify(experimentResult));
             console.log(req.responseText); 
           
             myApp.alert('The experiment is complete.', 'Thank You!');
@@ -102,7 +117,7 @@ var NOBexperiment = (function () {
     }
   
     function patternSet(p) {
-      currentPattern = p;
+      patternCurrent = p;
       
       var css = (p==1) ? 'css/framework7.material.min.css' : 'css/framework7.ios.min.css';
       $$( '#themeCSS' ).attr('href', css);
@@ -112,15 +127,15 @@ var NOBexperiment = (function () {
     
     function patternEnd() {
       $$('a.buttonStartTrial').attr('href', '#thank-you');
-      finishedPatterns.push(currentPattern);
-      var nextPattern = (currentPattern == 1) ? 2 : 1; // swapping
+      patternsFinished.push(patternCurrent);
+      var nextPattern = (patternCurrent == 1) ? 2 : 1; // swapping
       patternSet(nextPattern);
       numberOfTrialCurrent = 0;
       
       var button = $$('a#buttonThankYou');
       var text;
       var href
-      if (finishedPatterns.length < 2) {
+      if (patternsFinished.length < 2) {
         text = "Continue" ;
         href = "#Go";
       } else {
@@ -133,6 +148,9 @@ var NOBexperiment = (function () {
     }
   
     function trialStart() {
+        trialInfo = [];
+        trialInfo.push(participant.number);
+        trialInfo.push(patternCurrent);
         trialReset();
         menuCreate(numberOfMenuItems);
         targetDisplay();
@@ -141,7 +159,7 @@ var NOBexperiment = (function () {
     }
     
     function trialEnd() {
-        timeEnd = Date.now();      
+    //    timeEnd = Date.now();      
         trialResultWrite();
         trialReset();
         numberOfTrialCurrent += 1;
@@ -151,7 +169,7 @@ var NOBexperiment = (function () {
     }
 
     function trialReset() {
-        if (currentPattern == 1) {
+        if (patternCurrent == 1) {
         // Resetting Pattern 1 (slide menu)
           var ul = document.getElementById("navigationMenu");
           while (ul.firstChild) {
@@ -167,11 +185,8 @@ var NOBexperiment = (function () {
     }
 
     function trialResultWrite() {
-        var resultDisplay = $$('.resultDisplay'),
-            duration = timeEnd - timeStart;
-        results[resultNth] = duration; // This needs to be before incrementing resultNumber
-        resultNth += 1;
-        resultDisplay.text(duration/1000 + " seconds");
+        var resultDisplay = $$('.resultDisplay');
+        resultDisplay.text(trialDuration/1000 + " seconds");
         //resultDisplay.appendChild(p);
     }
   
@@ -196,16 +211,38 @@ var NOBexperiment = (function () {
         }
       
         targetText = menuItems[targetIndex];
+        trialInfo.push(targetText);
+        trialInfo.push(targetIndex);
       
-        if (currentPattern == 1) {
+        if (patternCurrent == 1) {
           menuCreatePattern1(menuItems, targetIndex, n);
         } else {
           menuCreatePattern2(menuItems, targetIndex, n);
         }
 
       // Enabling the button for the target menu item
-      $$('#menuItemTarget').on('click', function() {
-        trialEnd();
+//      $$('#menuItemTarget').on('click', function() {
+//        trialEnd();
+//      });
+      $$('a.menuItem').on('click', function() {
+        timeEnd = Date.now();
+        trialDuration = timeEnd - timeStart;
+        trialInfo.push(Number(this.attributes["data-item-position"].value));
+        trialInfo.push(trialDuration);
+        
+        results[resultNth] = trialDuration; // This needs to be before incrementing resultNumber
+        resultNth += 1; //every trial, error or correct
+        
+        var error;
+        if(this.attributes["id"]) {
+            error = 0;
+            trialEnd();
+        } else {
+            error = 1;
+        }
+        trialInfo.push(error);
+        experimentResult[resultNth] = trialInfo;
+        trialInfo = [];
       });
     }
   
@@ -247,7 +284,8 @@ var NOBexperiment = (function () {
             } else {
               a.setAttribute("href", "#incorrect");
             }
-            a.setAttribute("class", "close-panel");
+            a.setAttribute("class", "close-panel menuItem");
+            a.setAttribute("data-item-position", i);
             itemInner.appendChild(itemTitle);
             itemContent.appendChild(itemInner);
             a.appendChild(itemContent);
@@ -269,7 +307,9 @@ var NOBexperiment = (function () {
         
         var tabHref = (i==targetIndex) ? 'href="#correctTab" id="menuItemTarget" ' : 'href="#incorrectTab" ';
         
-        tabList.push( '<a ' + tabHref + 'class="tab-link">' +
+        tabList.push( '<a ' + tabHref + 'class="tab-link menuItem" ' + 
+                             'data-item-position=' + i + '>' +
+                      '<i class="icon"></i>' +
                       '<span class="tabbar-label">' +
                       menuItems[i] +
                       '</span>' +
@@ -278,10 +318,11 @@ var NOBexperiment = (function () {
       }
       //Adding the 5th one "More"
       tabList.push( '<a href="#moreTab" class="tab-link">' +
-                      '<span class="tabbar-label">' +
-                      'More' +
-                      '</span>' +
-                      '</a>'
+                    '<i class="icon"></i>' +
+                    '<span class="tabbar-label">' +
+                    'More' +
+                    '</span>' +
+                    '</a>'
                     );
       
       tabBar.append(tabList.join(''));
@@ -291,7 +332,8 @@ var NOBexperiment = (function () {
         var moreHref = (i==targetIndex) ? 'href="#correct" id="menuItemTarget" ' : 'href="#incorrect" ';
         
         moreTabList.push('<li>' +
-                         '<a ' + moreHref + 'class="item-link">' +
+                         '<a ' + moreHref + 'class="item-link menuItem" ' + 
+                                'data-item-position=' + i + '>' +
                          '<div class="item-content">' +
                          '<div class="item-inner">' +
                          '<div class="item-title">' +
@@ -314,10 +356,7 @@ var NOBexperiment = (function () {
     }
   
     // Public properties
-    experiment.getResults = function() {
-        results[0] = 1;
-        return results;
-    }
+    // none
     
     return experiment;
     
