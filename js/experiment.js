@@ -202,6 +202,9 @@ var NOBexperiment = (function () {
             }//Repeat and pick an item again if it is already in the array.
         }
       
+        // nav-bar's text
+        $$(".current-page-text").text(menuItems[0]);
+        
         targetText = menuItems[targetIndex];
         trialInfo.push(targetText);
         trialInfo.push(targetIndex);
@@ -250,9 +253,6 @@ var NOBexperiment = (function () {
 //                        </div>
 //                    </a>
 //                    </li>
-        
-        // nav-bar's text for pattern 1
-        $$("#current-page-text").text(menuItems[0]);
         
         var ul = document.getElementById("navigationMenu");
         // i=0 is the current page > special treatment
