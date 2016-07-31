@@ -8,22 +8,11 @@
 // DONE Save with User
 // DONE Close side panel
 // DONE- Mix material and ios themes
-// - Look at Pukar's requirements in Messenger
-// - Adjust the timing of theme swapping to avoid the blue strip on top of screen
+// DONE Look at Pukar's requirements in Messenger
+// DONE Adjust the timing of theme swapping to avoid the blue strip on top of screen
 //   when Pattern 2 is the first pattern (and finishes in the tab, not the list menu)
 // DONE Tabbar empty icon
-
-/* 
-Data to catpure for a trial
-- Participant ID
-- Trial Number
-- Navigation pattern
-- Target item
-- Item position
-- Selection time of item
-- Error count
-- Total trial duration
-*/
+// - first item of the menu is the "current page"
 
 var NOBexperiment = (function () {
     'use strict';
@@ -96,11 +85,11 @@ var NOBexperiment = (function () {
     $$('.buttonStartTrialIncorrect').on('click', function() {
        trialStart();
     });
-  
-    $$('#buttonThankYou').on('click', function() {
-      $$('a.buttonStartTrial').attr('href', '#Go');
-    });
-  
+    
+//    $$('.menuItemIncorrect').on('click', function() {
+//       trialReset();
+//    });
+    
     function saveExperiment() {
 
         if(results.length != 0){
@@ -121,11 +110,7 @@ var NOBexperiment = (function () {
     }
   
     function patternSet(p) {
-      patternCurrent = p;
-      
-//      var css = (p==1) ? 'css/framework7.material.min.css' : 'css/framework7.ios.min.css';
-//      $$( '#themeCSS' ).attr('href', css);
-//      
+      patternCurrent = p;      
       $$('#buttonStart').attr('href', '#pattern'+p);
     }
     
@@ -160,11 +145,9 @@ var NOBexperiment = (function () {
         menuCreate(numberOfMenuItems);
         targetDisplay();
         trialsToGO();
-        //timeStart = Date.now();
     }
     
     function trialEnd() {
-    //    timeEnd = Date.now();      
         trialResultWrite();
         trialReset();
         numberOfTrialCurrent += 1;
@@ -192,7 +175,6 @@ var NOBexperiment = (function () {
     function trialResultWrite() {
         var resultDisplay = $$('.resultDisplay');
         resultDisplay.text(trialDuration/1000 + " seconds");
-        //resultDisplay.appendChild(p);
     }
   
     function trialsToGO() {
@@ -203,7 +185,12 @@ var NOBexperiment = (function () {
     function menuCreate(n) {
         var menuItems = [],
             counter = 0,
-            targetIndex = Math.floor((Math.random() * n)); //get a number from 0 to n-1 to be the index of the target
+            // get a number from 1 to n-1 to be the index of the target
+            // the target cannot be 0 because that is the "current page"
+            // logic from here: 
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+            // Returns a random integer between min (included) and max (excluded)
+            targetIndex = Math.floor(Math.random() * (n - 1)) + 1; 
         while (counter < n) {
             // Randomly pick an item from the dictionary of any length.
             var item = dictionary[Math.floor((Math.random() * dictionary.length))];
@@ -225,15 +212,13 @@ var NOBexperiment = (function () {
           menuCreatePattern2(menuItems, targetIndex, n);
         }
 
-      // Enabling the button for the target menu item
-//      $$('#menuItemTarget').on('click', function() {
-//        trialEnd();
-//      });
       $$('a.menuItem').on('click', function() {
         timeEnd = Date.now();
         trialDuration = timeEnd - timeStart;
         trialInfo.push(Number(this.attributes["data-item-position"].value));
         trialInfo.push(trialDuration);
+          
+        trialReset();
         
         results[resultNth] = trialDuration; // This needs to be before incrementing resultNumber
         resultNth += 1; //every trial, error or correct
@@ -265,8 +250,12 @@ var NOBexperiment = (function () {
 //                        </div>
 //                    </a>
 //                    </li>
-// 
+        
+        // nav-bar's text for pattern 1
+        $$("#current-page-text").text(menuItems[0]);
+        
         var ul = document.getElementById("navigationMenu");
+        // i=0 is the current page > special treatment
         for (var i=0; i<n ;i++) {
             var li,
                 a,
@@ -286,10 +275,15 @@ var NOBexperiment = (function () {
             if(i==targetIndex) {
                 a.setAttribute("id", "menuItemTarget");
                 a.setAttribute("href", "#correct");
+                a.setAttribute("class", "item-link close-panel menuItem");
+            } else if (i==0) {
+              a.setAttribute("href", "#"); // Just close the menu by the class "close-panel"
+              a.setAttribute("class", "item-link close-panel");
             } else {
               a.setAttribute("href", "#incorrect");
+              a.setAttribute("class", "item-link close-panel menuItem");  
             }
-            a.setAttribute("class", "close-panel menuItem");
+            
             a.setAttribute("data-item-position", i);
             itemInner.appendChild(itemTitle);
             itemContent.appendChild(itemInner);
@@ -308,11 +302,24 @@ var NOBexperiment = (function () {
           moreTabList = [];          
       
       // Assuming the menu items (menuItems[]) are always equal or greater than 5 
+      // i=0 is the current page
       for (var i=0; i<5; i++) {
         
-        var tabHref = (i==targetIndex) ? 'href="#correctTab" id="menuItemTarget" ' : 'href="#incorrectTab" ';
+        var tabHref;
+        var tabClass;
+        if (i==targetIndex) {
+          tabHref = 'href="#correctTab" id="menuItemTarget" ';
+            tabClass = 'class="menuItem ';
+        } else if (i==0) {
+          tabHref = 'href="#defaultTab" ';
+          tabClass = 'class="active ';
+        } else {
+          tabHref  = 'href="#incorrectTab"  ';
+          tabClass = 'class="menuItem menuItemIncorrect inactive '; // not closing it
+        }
+        tabClass += 'tab-link" '
         
-        tabList.push( '<a ' + tabHref + 'class="tab-link menuItem" ' + 
+        tabList.push( '<a ' + tabHref +  tabClass + 
                              'data-item-position=' + i + '>' +
                       '<i class="icon"></i>' +
                       '<span class="tabbar-label">' +
@@ -334,7 +341,12 @@ var NOBexperiment = (function () {
       
       for (var i=5; i<n; i++) {
         
-        var moreHref = (i==targetIndex) ? 'href="#correct" id="menuItemTarget" ' : 'href="#incorrect" ';
+        var moreHref;
+        if (i==targetIndex) {
+          moreHref = 'href="#correct" id="menuItemTarget" ';  
+        } else {
+          moreHref = 'href="#incorrect" ';
+        }
         
         moreTabList.push('<li>' +
                          '<a ' + moreHref + 'class="item-link menuItem" ' + 
