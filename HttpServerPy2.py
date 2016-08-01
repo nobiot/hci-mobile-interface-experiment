@@ -1,3 +1,4 @@
+
 ## Porting HttpServer.py to Python 2
 import os
 import SimpleHTTPServer
@@ -33,7 +34,7 @@ class HTTPRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         print(o)
         participant = o['1'][0]
 
-filename = PREFIX + participant + EXTENSION
+        filename = PREFIX + participant + EXTENSION
         path = os.path.join(os.getcwd(), DIRECTORY, filename)
         with open(path, 'w') as file:
             w = csv.writer(file, 'excel')
