@@ -1,19 +1,3 @@
-// Browser limitation
-// array.includes(element) is not supported on all platforms (notably, IE and Edge do not).
-// TODO
-// DONE- Random numbers
-// DONE Flow - Go > Correct/Incorrect > Next
-// DONE- Remember the user
-// DONE Count the trials
-// DONE Save with User
-// DONE Close side panel
-// DONE- Mix material and ios themes
-// DONE Look at Pukar's requirements in Messenger
-// DONE Adjust the timing of theme swapping to avoid the blue strip on top of screen
-//   when Pattern 2 is the first pattern (and finishes in the tab, not the list menu)
-// DONE Tabbar empty icon
-// - first item of the menu is the "current page"
-
 var NOBexperiment = (function () {
     'use strict';
     
@@ -24,6 +8,10 @@ var NOBexperiment = (function () {
         numberOfMenuItems      = 10,  // default number of menu items displayed
         numberOfMenuCandiates  = 99, // 1-n menu items will be used to randomly generate the menu
         numberOfTrials       = 1, // Number of repeats in one pattern
+        message1 = "Please complete questionnaire 1 before you continue.",
+        message2 = "Please complete questionnaire 2.",
+        title1 = 'Confirm',
+        title2 = 'Confirm',
     
     //properties   
         participant,
@@ -86,24 +74,19 @@ var NOBexperiment = (function () {
        trialStart();
     });
     
-//    $$('.menuItemIncorrect').on('click', function() {
-//       trialReset();
-//    });
-    
     function saveExperiment() {
-
         if(results.length != 0){
             var req = new XMLHttpRequest();
             req.open("POST", "", false); // Syncronous call is deprecated. TODO
             req.send(JSON.stringify(experimentResult));
             console.log(req.responseText); 
           
-            myApp.alert('The experiment is complete.', 'Thank You!');
+            myApp.alert(message2, title2);
         }else{
             // You cannot be here.
         }
-      
     }
+
     function patternSetCSS() {
         var css = (patternCurrent==1) ? 'css/framework7.material.min.css' : 'css/framework7.ios.min.css';
         $$( '#themeCSS' ).attr('href', css);
@@ -126,15 +109,23 @@ var NOBexperiment = (function () {
       var href
       if (patternsFinished.length < 2) {
         text = "Continue" ;
-        href = "#Go";
+        href = "#";
+        button.once('click', patternEndMessage);
       } else {
         text = "Finish" ;
         href = "#";
         button.once('click', saveExperiment); // probably this one should accept a callback to pop up confirmation
+        $$('#thankYouPageText').text('Experient complete.');
       }
       button.text(text);
       button.attr('href', href);
     }
+        
+    function patternEndMessage() {
+        myApp.alert(message1, title1, function () {
+           mainView.router.load({pageName: 'Go'}); 
+        });
+      }
   
     function trialStart() {
         patternSetCSS();
@@ -221,6 +212,9 @@ var NOBexperiment = (function () {
         trialInfo.push(Number(this.attributes["data-item-position"].value));
         trialInfo.push(trialDuration);
           
+        mainView.hideNavbar();  
+        mainView.hideToolbar();
+        
         trialReset();
         
         results[resultNth] = trialDuration; // This needs to be before incrementing resultNumber
