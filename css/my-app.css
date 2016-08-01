@@ -1,3 +1,16 @@
+/*
 body.with-panel-left-cover .panel-left {
     background-color: #fff;
 } 
+*/
+
+/* Text alignment ofr tab correct/incorrect page*/
+.tab .content-block .list-block-label {
+    text-align:    center;
+    margin:     24px auto;
+}
+
+/* removing arrows in side drawer */
+.list-block .item-link .item-inner {
+    background-image: none;
+}

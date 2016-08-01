@@ -278,7 +278,7 @@ var NOBexperiment = (function () {
                 a.setAttribute("class", "item-link close-panel menuItem");
             } else if (i==0) {
               a.setAttribute("href", "#"); // Just close the menu by the class "close-panel"
-              a.setAttribute("class", "item-link close-panel");
+              a.setAttribute("class", "item-link:active close-panel");
             } else {
               a.setAttribute("href", "#incorrect");
               a.setAttribute("class", "item-link close-panel menuItem");  
