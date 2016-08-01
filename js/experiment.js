@@ -7,7 +7,7 @@ var NOBexperiment = (function () {
     // parameters that can / should be changed 
         numberOfMenuItems      = 15,  // default number of menu items displayed
         numberOfMenuCandiates  = 99, // 1-n menu items will be used to randomly generate the menu
-        numberOfTrials       = 60, // Number of repeats in one pattern
+        numberOfTrials       = 2, // Number of repeats in one pattern
         message1 = "Please complete questionnaire 1 before you continue.",
         message2 = "Please complete questionnaire 2.",
         title1 = 'Confirm',
@@ -123,6 +123,7 @@ var NOBexperiment = (function () {
         
     function patternEndMessage() {
         myApp.alert(message1, title1, function () {
+           $$('a.buttonStartTrial').attr('href', '#Go');
            mainView.router.load({pageName: 'Go'}); 
         });
       }
