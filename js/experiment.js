@@ -5,9 +5,9 @@ var NOBexperiment = (function () {
     var experiment = {},
         
     // parameters that can / should be changed 
-        numberOfMenuItems      = 10,  // default number of menu items displayed
+        numberOfMenuItems      = 15,  // default number of menu items displayed
         numberOfMenuCandiates  = 99, // 1-n menu items will be used to randomly generate the menu
-        numberOfTrials       = 1, // Number of repeats in one pattern
+        numberOfTrials       = 60, // Number of repeats in one pattern
         message1 = "Please complete questionnaire 1 before you continue.",
         message2 = "Please complete questionnaire 2.",
         title1 = 'Confirm',
@@ -297,7 +297,7 @@ var NOBexperiment = (function () {
       
       // Assuming the menu items (menuItems[]) are always equal or greater than 5 
       // i=0 is the current page
-      for (var i=0; i<5; i++) {
+      for (var i=0; i<4; i++) {
         
         var tabHref;
         var tabClass;
@@ -322,7 +322,7 @@ var NOBexperiment = (function () {
                       '</a>'
                     );
       }
-      //Adding the 5th one "More"
+      //Adding the 4th one "More"
       tabList.push( '<a href="#moreTab" class="tab-link">' +
                     '<i class="icon"></i>' +
                     '<span class="tabbar-label">' +
@@ -333,7 +333,7 @@ var NOBexperiment = (function () {
       
       tabBar.append(tabList.join(''));
       
-      for (var i=5; i<n; i++) {
+      for (var i=4; i<n; i++) {
         
         var moreHref;
         if (i==targetIndex) {
