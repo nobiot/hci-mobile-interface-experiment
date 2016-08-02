@@ -305,9 +305,9 @@ var NOBexperiment = (function () {
         var tabClass;
         if (i==targetIndex) {
           tabHref = 'href="#correctTab" id="menuItemTarget" ';
-            tabClass = 'class="menuItem ';
+          tabClass = 'class="menuItem ';
         } else if (i==0) {
-          tabHref = 'href="#defaultTab" ';
+          tabHref = 'href="#defaultTab" id="tabFirst" ';
           tabClass = 'class="active ';
         } else {
           tabHref  = 'href="#incorrectTab"  ';
@@ -325,7 +325,7 @@ var NOBexperiment = (function () {
                     );
       }
       //Adding the 4th one "More"
-      tabList.push( '<a href="#moreTab" class="tab-link">' +
+      tabList.push( '<a href="#moreTab" class="tab-link" id="tabMore">' +
                     '<i class="icon"></i>' +
                     '<span class="tabbar-label">' +
                     'More' +
@@ -354,7 +354,16 @@ var NOBexperiment = (function () {
                          '</div></div></div></a></li>'
                         );
       }
+        
       moreTabMenu.append(moreTabList.join(''));
+        
+      $$("#tabFirst").on('click', function() {
+          $$(".current-page-text").text(menuItems[0]);
+      });
+        
+      $$("#tabMore").on('click', function() {
+          $$(".current-page-text").text("More");
+      });
       
     }
 
