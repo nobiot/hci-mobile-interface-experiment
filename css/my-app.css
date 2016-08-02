@@ -11,6 +11,6 @@ body.with-panel-left-cover .panel-left {
 }
 
 /* removing arrows in side drawer */
-.list-block .item-link .item-inner {
+.list-block .item-link .item-inner.slider {
     background-image: none;
 }

@@ -264,7 +264,7 @@ var NOBexperiment = (function () {
             itemContent = document.createElement("div");
             itemContent.setAttribute("class", "item-content");
             itemInner = document.createElement("div");
-            itemInner.setAttribute("class", "item-inner");
+            itemInner.setAttribute("class", "item-inner slider");
             itemTitle = document.createElement("div");
             itemTitle.setAttribute("class", "item-title");
             itemTitle.textContent = menuItems[i];
