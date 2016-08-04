@@ -171,7 +171,7 @@ var NOBexperiment = (function () {
   
     function trialsToGO() {
       var nToGo = numberOfTrials - numberOfTrialCurrent;
-      $$('#trialsToGo').text('Task remaining: ' + nToGo);
+      $$('.trialsToGo').text('Task remaining: ' + nToGo);
     }
 
     function menuCreate(n) {
