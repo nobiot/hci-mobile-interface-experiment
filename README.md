@@ -44,9 +44,12 @@ a mobile device in the same WiFi network to access it.
 The results will be automatically saved in the `results` folder, with
 the name:
 
-`p` + participant id + `.py`, like this example:
+`p` + participant id + `.csv`, like this example:
 
-	p12.py
+	p12.csv
+
+The meaning of the columns of the resultant csv file is documented in
+`header_sample.csv` in `results` folder. 
 
 Limitations etc.
 ===========
