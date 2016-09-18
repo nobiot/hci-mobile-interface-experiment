@@ -12,7 +12,7 @@ Overview
 The application consists of two parts:
 
 1. Web application written in Javascript based on Framework7
-   (framework7.io). The main application is encapsulated in experiment.js
+   (http://framework7.io). The main application is encapsulated in experiment.js
 
 2. Python web server script.
    This is written as extension to SimpleHTTPServer (for Python 2) and
