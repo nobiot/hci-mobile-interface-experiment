@@ -22,17 +22,21 @@ The application consists of two parts:
 Screen Shots
 ==========
 
-<style>
-img {display:inline;border-style:solid;border-color:gray;border-width:1px;margin:20px}
-</style>
 <img src="images/pattern_selector.png" width="150" alt="Image of Pattern
 Selector">
 <img src="images/prompt.png" width="150" alt="Image of Prompt">
 <img src="images/pattern1.png" width="150" alt="Pattern 1 - Side Panel in
-Andoriod's Material Design">
+Android's Material Design">
 <img 
 src="images/pattern2.png" width="150" alt="Pattern 2 - Tab Bar in
 iOS">
+
+Note (from left to right):
+
+1. Pattern selector
+2. "Find" prompt
+3. Experiment pattern 1 -- side panel in Android's Material Design
+4. Experiment pattern 2 -- tab bar in iOS
 
 How to Use
 ==========
