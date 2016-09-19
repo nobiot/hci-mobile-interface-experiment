@@ -23,14 +23,12 @@ Screen Shots
 ==========
 
 <img style="display:inline;" src="images/pattern_selector.png" width="150" alt="Image of
-Pattern Selector">
-
-<img style="display:inline;" src="images/prompt.png" width="150" alt="Image of Prompt">
-
-<img style="display:inline;" src="images/pattern1.png" width="150" alt="Pattern 1 - Side Panel in Andoriod's Material Design">
-
-<img style="display:inline;" src="images/pattern2.png" width="150" alt="Pattern 2 - Tab Bar in iOS">
-
+Pattern Selector"><img style="display:inline;" src="images/prompt.png"
+width="150" alt="Image of Prompt"><img style="display:inline;"
+src="images/pattern1.png" width="150" alt="Pattern 1 - Side Panel in
+Andoriod's Material Design"><img style="display:inline;"
+src="images/pattern2.png" width="150" alt="Pattern 2 - Tab Bar in
+iOS">
 
 How to Use
 ==========
