@@ -19,20 +19,29 @@ The application consists of two parts:
    http.server (for Python 3) so that the web server can handle the
    POST request
 
+Screen Shots
+==========
+
+{% include figure.html filename="images/pattern_selector.png" caption="Caption to image" %}
+
+
 
 How to Use
-===========
+==========
 
 Run the server in command line like so:
 
 ```bash
 python HttpServer.py
 ```
-or
+
+for Python 3, or
 
 ```bash
 python HttpServerPy2.py
 ```
+
+for Python 2 (this is usually default for Mac OS).
 
 Open a browser (intended to be used in Chrome) and go to
 localhost:8080. The default host is hardcoded in the python script
