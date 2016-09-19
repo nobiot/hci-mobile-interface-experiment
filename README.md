@@ -22,15 +22,15 @@ The application consists of two parts:
 Screen Shots
 ==========
 
-<img
-style="display:inline;border-style:solid;border-color:gray;border-width:1px;margin:20px"
-src="images/pattern_selector.png" width="150" alt="Image of Pattern
-Selector"><img
-style="display:inline;border-style:solid;border-color:gray;border-width:1px;margin:20px;"
-src="images/prompt.png" width="150" alt="Image of Prompt"><img
-style="display:inline;border-style:solid;border-color:gray;border-width:1px;margin:20px;"
-src="images/pattern1.png" width="150" alt="Pattern 1 - Side Panel in
-Andoriod's Material Design"><img style="display:inline;border-style:solid;border-color:gray;border-width:1px;margin:20px;"
+<style>
+img {display:inline;border-style:solid;border-color:gray;border-width:1px;margin:20px}
+</style>
+<img src="images/pattern_selector.png" width="150" alt="Image of Pattern
+Selector">
+<img src="images/prompt.png" width="150" alt="Image of Prompt">
+<img src="images/pattern1.png" width="150" alt="Pattern 1 - Side Panel in
+Andoriod's Material Design">
+<img 
 src="images/pattern2.png" width="150" alt="Pattern 2 - Tab Bar in
 iOS">
 
