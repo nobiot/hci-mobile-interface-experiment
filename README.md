@@ -22,8 +22,18 @@ The application consists of two parts:
 Screen Shots
 ==========
 
-{% include figure.html filename="images/pattern_selector.png" caption="Caption to image" %}
 
+![Image of Pattern Selector](images/pattern_selector.png
+"Pattern Selector")
+
+![Image of Pattern Selector](images/prompt.png
+!"Prompt")
+
+![Image of - Side Panel in Andoriod's Material Design](images/pattern1.png
+!"Pattern 1 - Side Panel in Andoriod's Material Design")
+
+![Pattern 2 - Tab Bar in iOS](images/pattern2.png "Pattern 2 - Tab Bar
+in iOS")
 
 
 How to Use
