@@ -22,15 +22,14 @@ The application consists of two parts:
 Screen Shots
 ==========
 
-<img src="images/pattern_selector.png" width="50" alt="Image of Pattern Selector">
+<img src="images/pattern_selector.png" width="150" alt="Image of
+Pattern Selector">
 
-![Image of Pattern Selector](images/prompt.png "Prompt")
+<img src="images/prompt.png" width="150" alt="Image of Prompt">
 
-![Image of - Side Panel in Andoriod's Material Design](images/pattern1.png
- "Pattern 1 - Side Panel in Andoriod's Material Design")
+<img src="images/pattern1.png" width="150" alt="Pattern 1 - Side Panel in Andoriod's Material Design">
 
-![Pattern 2 - Tab Bar in iOS](images/pattern2.png "Pattern 2 - Tab Bar
-in iOS")
+<img src="images/pattern2.png" width="150" alt="Pattern 2 - Tab Bar in iOS">
 
 
 How to Use
